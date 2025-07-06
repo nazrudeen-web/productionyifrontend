@@ -25,7 +25,7 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      "https://channelincome-backend.ytincome.workers.dev/sitemap-keys"
+      "https://api.youtubersincome.com/sitemap-keys"
     );
     if (res.ok) {
       const handles = await res.json();
