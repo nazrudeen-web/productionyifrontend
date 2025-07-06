@@ -1,0 +1,411 @@
+---
+import { fetchTopChannels } from "../data/topChannelsFetch";
+const results = await fetchTopChannels();
+
+const { data } = Astro.props;
+import Share from "./Share.astro";
+
+function formatNumber(n) {
+  return new Intl.NumberFormat("en", {
+    notation: "compact",
+    compactDisplay: "short",
+    maximumFractionDigits: 1,
+  }).format(n);
+}
+
+const publishedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const topics =
+  data.topicCategories?.map((url) => {
+    const name = url.split("/").pop()?.replace(/_/g, " ") || "";
+    return decodeURIComponent(name);
+  }) || [];
+
+const readableTopics =
+  topics.length > 1
+    ? topics.slice(0, -1).join(", ") + " & " + topics.slice(-1)
+    : topics[0] || "Creator";
+
+const countryFull = data.country || "US";
+// 3. Convert country code to full name
+const countryName = new Intl.DisplayNames(["en"], { type: "region" }).of(
+  countryFull
+);
+
+// 4. Convert country code to flag emoji
+function getFlagEmoji(code) {
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt()));
+}
+const flag = getFlagEmoji(countryFull);
+
+// Format function (e.g. "$1.2K")
+function formatIncomeNumber(num) {
+  const rounded = Math.round(num * 10) / 10; // round to 1 decimal place
+  return Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1);
+}
+
+function formatUSD(amount) {
+  if (amount < 1000) {
+    return "$" + amount.toString();
+  } else if (amount < 1000000) {
+    return (
+      "$" +
+      new Intl.NumberFormat("en", {
+        maximumFractionDigits: 0,
+      }).format(amount)
+    );
+  } else if (amount < 1000000000) {
+    const millionAmount = amount / 1000000;
+    return "$" + formatIncomeNumber(millionAmount) + " million";
+  } else {
+    const billionAmount = amount / 1000000000;
+    return "$" + formatIncomeNumber(billionAmount) + " billion";
+  }
+}
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: `How much does ${data.title} earn each month?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `The monthly income of ${data.title} depends on several factors, including ad revenue, viewer location, CPM rates, and sponsorship deals. Based on average views, the estimated monthly earnings are ${formatUSD(data.monthlyIncome)}.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: `What type of content does ${data.title} create?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `${data.title} focuses on content related to ${readableTopics}. The channel’s style and topics may evolve over time to keep things fresh and engaging for its audience.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: `Where is ${data.title} based?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `This channel is registered in ${countryName} and has a global reach, connecting with viewers from all around the world.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: `When was ${data.title} started on YouTube?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `${data.title} launched the channel on ${publishedDate} and has steadily grown since then.`,
+      },
+    },
+  ],
+};
+---
+
+<!-- Container -->
+<div class="mx-6">
+  <div
+    class="mx-auto mt-10 max-w-4xl overflow-hidden rounded-xl bg-white shadow-lg"
+  >
+    <!-- Banner with fallback + profile image properly aligned -->
+    <div
+      class="relative h-36 w-full rounded-t-xl bg-gradient-to-br from-gray-600 to-gray-700"
+    >
+      <!-- Banner image (with fallback if no URL) -->
+      {
+        data.bannerImage ? (
+          <img
+            src={data.bannerImage}
+            alt="Banner"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+            onError={(e) => {
+              console.error("Banner image failed to load:", e);
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        ) : null
+      }
+
+      <!-- Profile image (correct position + spacing) -->
+      <div class="absolute -bottom-16 left-6 z-10">
+        <img
+          src={data.thumbnail}
+          alt="Profile"
+          class="h-32 w-32 rounded-full border-4 border-white shadow-md object-cover aspect-square bg-white"
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            console.error("profile image failed to load:", e);
+            e.currentTarget.style.display = "none";
+          }}
+        />
+      </div>
+    </div>
+
+    <!-- Header Info -->
+    <div class="px-6 pt-20 pb-6">
+      <div class="flex flex-wrap items-start justify-between">
+        <div>
+          <h2 class="text-2xl font-bold">{data.title}</h2>
+          <p class="text-sm text-gray-500 md:text-base">
+            YouTube Creator · {readableTopics}
+          </p>
+          <div class="mt-1 text-sm text-gray-500">
+            Published: {publishedDate} · {flag}
+            {countryName}
+          </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-4">
+          <!-- Visit Channel Button -->
+          <a
+            href={`https://www.youtube.com/${data.customUrl}`}
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-2 rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+          >
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 3v2h8.59L3 20.59 4.41 22 20 6.41V15h2V3z"></path>
+            </svg>
+            Visit Channel
+          </a>
+
+          <!-- Share Icons Group -->
+          <Share data={data} />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Box -->
+<div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+  <h2 class="text-md mb-4 font-semibold text-gray-800">Channel Statistics</h2>
+  <div
+    class="grid grid-cols-1 gap-4 text-center text-sm text-gray-700 sm:grid-cols-3"
+  >
+    <!-- Subscribers -->
+    <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+      <div class="text-xl font-bold text-blue-600">
+        {formatNumber(data.subscriberCount)}
+      </div>
+      <div class="mt-1 text-gray-500">Subscribers</div>
+    </div>
+
+    <!-- Views -->
+    <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+      <div class="text-xl font-bold text-green-600">
+        {formatNumber(data.viewCount)}
+      </div>
+      <div class="mt-1 text-gray-500">Total Views</div>
+    </div>
+
+    <!-- Videos -->
+    <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+      <div class="text-xl font-bold text-purple-600">{data.videoCount}</div>
+      <div class="mt-1 text-gray-500">Videos Uploaded</div>
+    </div>
+  </div>
+</div>
+
+<!-- About the Channel -->
+<div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+  <h2 class="text-xl font-semibold text-gray-800">About {data.title}</h2>
+
+  {
+    data.description && data.description.length > 100 ? (
+      <p class="mt-3 text-sm whitespace-pre-line leading-loose text-gray-700 md:text-base md:leading-8">
+        {data.description}
+      </p>
+    ) : (
+      <>
+        <p class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-8">
+          <strong>{data.title}</strong> is a popular YouTube channel best known
+          for its engaging content in the <strong>{readableTopics}</strong>{" "}
+          niche. The channel was launched on <strong>{publishedDate}</strong>{" "}
+          and has since grown a loyal audience of over{" "}
+          <strong>{formatNumber(data.subscriberCount)} subscribers</strong>.
+          With <strong>{formatNumber(data.viewCount)} total views</strong>{" "}
+          across <strong>{data.videoCount} uploaded videos</strong>,{" "}
+          {data.title} continues to be a major presence on the platform.
+        </p>
+        <p class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-8">
+          Created in <strong>{countryName}</strong>, this YouTube channel
+          connects with viewers worldwide through high-quality and consistent
+          content. Whether it's tutorials, vlogs, reviews, or entertainment,{" "}
+          <strong>{data.title}</strong> has built a reputation for delivering
+          videos that educate, entertain, and inspire.
+        </p>
+      </>
+    )
+  }
+</div>
+
+<!-- Estimated Earnings -->
+<div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+  <h1 class="text-xl font-semibold text-gray-800">
+    How Much Does {data.title} Make on YouTube?
+  </h1>
+
+  <p class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-8">
+    Estimated YouTube income is calculated using average{" "}
+    <strong>CPM (Cost Per 1,000 views)</strong>. This estimate may not include
+    sponsorships, merchandise, or business revenue.
+  </p>
+  <!-- Earnings Grid -->
+  <div
+    class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm text-gray-700"
+  >
+    <div class="rounded-lg bg-amber-100 p-4 shadow-sm">
+      <div class="text-lg font-semibold text-amber-900">Daily Earnings</div>
+      <div class="mt-1 text-xl font-bold text-amber-700">
+        {formatUSD(data.dailyIncome)}
+      </div>
+    </div>
+
+    <!-- Monthly -->
+    <div class="rounded-lg bg-green-50 p-4 shadow-sm">
+      <div class="text-lg font-semibold text-gray-800">Monthly Earnings</div>
+      <div class="mt-1 text-xl font-bold text-green-600">
+        {formatUSD(data.monthlyIncome)}
+      </div>
+    </div>
+
+    <!-- Yearly -->
+    <div class="rounded-lg bg-blue-50 p-4 shadow-sm">
+      <div class="text-lg font-semibold text-gray-800">Yearly Earnings</div>
+      <div class="mt-1 text-xl font-bold text-blue-600">
+        {formatUSD(data.yearlyIncome)}
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-6 text-sm text-gray-600">
+    Note: This is a rough estimate based on YouTube ad revenue only. Actual
+    earnings depend on CPM, watch time, location, and monetization method.
+  </p>
+</div>
+
+<!-- FAQ Section -->
+<div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+  <h2 class="mb-4 text-xl font-semibold text-gray-800">
+    Frequently Asked Questions about {data.title}
+  </h2>
+  <div
+    class="space-y-6 text-sm leading-loose text-gray-700 md:text-base md:leading-loose"
+  >
+    <div>
+      <h3 class="font-semibold text-gray-900">
+        How much does {data.title} earn each month?
+      </h3>
+      <p>
+        The monthly income of {data.title} depends on several factors, including
+        ad revenue, viewer location, CPM rates, and sponsorship deals. Based on average
+        views, the estimated monthly earnings are <strong
+          >{formatUSD(data.monthlyIncome)}</strong
+        >.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-900">
+        What type of content does {data.title} create?
+      </h3>
+      <p>
+        {data.title} focuses on content related to <strong
+          >{readableTopics}</strong
+        >. The channel’s style and topics may evolve over time to keep things
+        fresh and engaging for its audience.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-900">
+        Where is {data.title} based?
+      </h3>
+      <p>
+        This channel is registered in <strong>{countryName}</strong>
+        {flag} and has a global reach, connecting with viewers from all around the
+        world.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-900">
+        When was {data.title} started on YouTube?
+      </h3>
+      <p>
+        {data.title} launched the channel on <strong>{publishedDate}</strong> and
+        has steadily grown since then.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+  <h2 class="text-xl font-semibold text-gray-800">Explore More Channels</h2>
+  <p
+    class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-loose"
+  >
+    Use our YouTube earnings tool to check estimated revenue of any channel —
+    influencers, educators, vloggers, and more. Just search using a YouTube
+    handle or channel ID to get started.
+  </p>
+
+  <!-- Grid of Channels -->
+  <div class="grid grid-cols-2 mt-6 sm:grid-cols-4 md:grid-cols-5 gap-6">
+    {
+      results.map((channel, index) => (
+        <a
+          href={`/${channel.slug}`}
+          class="flex flex-col items-center text-center hover:underline"
+          key={channel.slug}
+        >
+          <img
+            src={`/images/${channel.slug}.webp`}
+            alt={`${channel.name} Profile`}
+            width={80}
+            height={80}
+            class="w-20 h-20 rounded-full object-cover shadow-md"
+            loading={index < 5 ? "eager" : "lazy"}
+          />
+          <span class="mt-2 font-medium text-gray-800">{channel.name}</span>
+        </a>
+      ))
+    }
+  </div>
+  <!-- View More Button -->
+  <div class="mt-8 text-center">
+    <a
+      href="/top-channels"
+      class="inline-flex items-center gap-2 rounded-lg bg-tPrimary px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"></path>
+      </svg>
+      View More Channels
+    </a>
+  </div>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

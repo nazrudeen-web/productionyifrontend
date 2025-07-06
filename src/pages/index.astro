@@ -1,0 +1,74 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layout/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import TopChannels from "../components/TopChannels.astro";
+import Footer from "../components/Footer.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+
+// Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
+const url = new URL(Astro.request.url);
+const pathname = url.pathname;
+
+// Only run redirect logic if user is on homepage AND ?channel exists
+const input = pathname === "/" ? url.searchParams.get("channel") : null;
+
+// Clean user input: remove @ or get path from full URL
+function cleanInput(raw) {
+  const trimmed = raw.trim();
+  if (trimmed.startsWith("http")) {
+    try {
+      const link = new URL(trimmed);
+      return link.pathname.replace(/^\/+/, "");
+    } catch {
+      return trimmed;
+    }
+  }
+  return trimmed.replace(/^@+/, "");
+}
+
+// Check if input is YouTube channel ID (starts with UC...) or handle/name
+function detectInputType(value) {
+  return /^UC[a-zA-Z0-9_-]{22}$/.test(value) ? "id" : "handleOrName";
+}
+
+// If input exists, process it and redirect to proper page
+if (input) {
+  const cleaned = cleanInput(input);
+  const type = detectInputType(cleaned);
+
+  if (type === "id") {
+    // If input is a channel ID, fetch info from backend
+    const apiUrl = `https://api.youtubersincome.com/?channel=${cleaned}`;
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    if (data && (data.handle || data.title)) {
+      const baseName = data.handle
+        ? data.handle.replace(/^@+/, "")
+        : data.title.toLowerCase().replace(/\s+/g, "");
+      return Astro.redirect(`/${baseName}-net-worth`, 301);
+    } else {
+      // No data found, go to not-found page
+      return Astro.redirect("/not-found");
+    }
+  }
+
+  // If input is a handle or name, clean it and redirect
+  const baseName = cleaned.replace(/\s+/g, "").replace(/^@+/, "");
+  return Astro.redirect(`/${baseName}-net-worth`, 301);
+}
+---
+
+<BaseLayout
+  pageTitle="YouTube Earnings Calculator - Estimate Income from Any Channel"
+  pageDescription="Quickly check how much a YouTube channel earns using our free earnings estimator. Just enter a handle or channel ID."
+  pageUrl="https://youtubersincome.com"
+>
+  <Header />
+  <Hero />
+  <TopChannels />
+  <HowItWorks />
+  <Footer />
+</BaseLayout>

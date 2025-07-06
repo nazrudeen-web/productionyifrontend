@@ -1,0 +1,104 @@
+<section
+  class="border-b border-divider bg-bcSecondary py-6 text-gray-900 md:py-16"
+>
+  <div
+    class="mx-auto max-w-4xl rounded-xl bg-bcPrimary px-4 py-8 text-center shadow md:py-16 md:px-10"
+  >
+    <h1
+      class="text-2xl tracking-tight uppercase font-extrabold text-tPrimary font-poppins md:text-3xl"
+    >
+      How Much Do YouTubers Really Make?
+    </h1>
+    <p class="mt-2 text-sm text-tSecondary max-w-4xl mx-auto md:text-base">
+      Discover channel income using real-time data.
+    </p>
+
+    <!-- Search Form -->
+    <form method="get" class="mt-8">
+      <div class="flex flex-col items-stretch gap-3 md:flex-row">
+        <!-- Input with icon on the left -->
+        <div class="relative flex-1">
+          <span
+            class="absolute inset-y-0 left-3 flex items-center text-tSecondary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              ></path>
+            </svg>
+          </span>
+          <input
+            type="text"
+            name="channel"
+            id="channel-input"
+            placeholder="Example: @username, channel ID, or full YouTube URL"
+            class="w-full bg-bcSecondary rounded-md border border-red-500 py-4 pr-6 pl-10 text-base text-gray-800 shadow-md focus:outline-none focus:!border-accent focus:ring-1 focus:!ring-accent"
+          />
+        </div>
+
+        <!-- CTA Button -->
+        <button
+          type="submit"
+          class="w-full rounded-md bg-tPrimary px-6 py-3 text-base font-medium text-white hover:bg-accent sm:w-auto cursor-pointer tracking-wider"
+          >Estimate Income</button
+        >
+      </div>
+    </form>
+
+    <!-- Example tags -->
+    <div
+      class="mt-6 flex flex-wrap justify-center items-center gap-4 text-sm text-tPrimary font-medium"
+    >
+      <button
+        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
+        data-channel="@mrbeast"
+      >
+        @mrbeast
+      </button>
+      <button
+        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
+        data-channel="TSeries"
+      >
+        TSeries
+      </button>
+      <button
+        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
+        data-channel="https://www.youtube.com/@pewdiepie"
+      >
+        https://youtube.com/@pewdiepie
+      </button>
+    </div>
+
+    <p class="mt-8 text-sm text-tPrimary">
+      🛡️ <strong>Powered by the official YouTube API</strong> — real-time, accurate
+      results from YouTube directly.
+    </p>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tags = document.querySelectorAll("[data-channel]");
+    const input = document.getElementById("channel-input");
+
+    if (!input) return;
+
+    tags.forEach((tag) => {
+      tag.addEventListener("click", () => {
+        const value = tag.getAttribute("data-channel");
+        input.value = value;
+        console.log(value);
+        input.focus();
+      });
+    });
+  });
+</script>

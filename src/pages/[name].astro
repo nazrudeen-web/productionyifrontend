@@ -1,0 +1,45 @@
+---
+const { params } = Astro;
+
+import BaseLayout from "../layout/BaseLayout.astro";
+import NotFound from "./not-found.astro";
+import ChannelDetails from "../components/ChannelDetails.astro";
+import HeaderWithForm from "../components/HeaderWithForm.astro";
+import Footer from "../components/Footer.astro";
+
+const cleanName = (params.name ?? "").replace(/-net-worth$/, "");
+const apiUrl = `https://api.youtubersincome.com/?channel=@${cleanName}`;
+
+let data = null;
+let isError = false;
+
+try {
+  const response = await fetch(apiUrl);
+  data = await response.json();
+  // Check for required fields to validate real channel data
+  if (!data || !data.title || !data.subscriberCount || !data.viewCount) {
+    isError = true;
+  }
+} catch (err) {
+  console.error("Failed to fetch channel data:", err);
+  isError = true;
+}
+
+const channelTitle = data?.title ?? "Unknown Channel";
+
+const pageTitle = `${channelTitle} YouTube Channel Income, Revenue & Earnings`;
+const pageDescription = `Explore how much ${channelTitle} earns from YouTube ads. Up-to-date stats including views, subscribers, and revenue.`;
+const pageUrl = `https://youtubersincome.com/${params.name}`;
+const pageImage = data?.thumbnail ?? null;
+---
+
+<BaseLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  pageUrl={pageUrl}
+  pageImage={pageImage}
+>
+  <HeaderWithForm />
+  {isError ? <NotFound /> : <ChannelDetails data={data} />}
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const posts = [
+  {
+    title: "How Much Money Do YouTubers Make Per 1,000 Views in 2025?",
+    description:
+      "Learn how much YouTube pays per 1,000 views (CPM) and how creators can increase earnings.",
+    href: "/blog/How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
+    pubDate: "July 06, 2025",
+  },
+  {
+    title: "How to Grow a YouTube Channel from Scratch (2025 Guide)",
+    description:
+      "Learn how to start and grow a successful YouTube channel in 2025. Follow step-by-step tips on choosing a niche, creating content, and gaining subscribers",
+    href: "/blog/How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
+    pubDate: "July 07, 2025",
+  },
+];
+
+const pageTitle = "YouTube Earnings Blog & Creator Tips";
+const pageDescription =
+  "Read articles about how creators earn on YouTube, CPM rates, niche breakdowns, and ways to grow your channel and revenue.";
+const pageUrl = "https://channelincome.com/blog";
+const pageImage = "/default-og-image.png";
+const isBlog = true;
+---
+
+<BaseLayout {pageTitle} {pageDescription} {pageUrl} {pageImage} {isBlog}>
+  <Header />
+  <!-- Hero Section -->
+  <section class="text-center py-14 px-2 bg-bcSecondary text-gray-900">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-xl md:text-2xl font-bold mb-4 uppercase">
+        YouTube Earnings Blog & Creator Tips
+      </h1>
+      <p class="text-base max-w-3xl mx-auto text-gray-600">
+        Learn how creators grow income on YouTube. Explore monetization
+        strategies, CPM insights, and channel growth tips.
+      </p>
+    </div>
+  </section>
+
+  <main class="max-w-4xl mx-auto px-4 md:px-6 py-10">
+    <h2 class="text-xl font-semibold ml-2 tracking-wide mb-6 text-gray-800">
+      Explore the Latest Posts
+    </h2>
+    <ul class="grid gap-12 md:grid-cols-2">
+      {
+        posts.map((post) => (
+          <li class="group border border-divider rounded-xl bg-white p-5 transition hover:border-red-400">
+            <a href={post.href} class="block space-y-2">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-red-600 transition">
+                {post.title}
+              </h3>
+              <p class="text-xs text-gray-400">{post.pubDate}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                {post.description}
+              </p>
+              <span class="inline-block mt-2 text-sm text-red-600 font-medium group-hover:underline">
+                Read more →
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+
+  <Footer />
+</BaseLayout>
