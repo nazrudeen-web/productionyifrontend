@@ -24,19 +24,33 @@ export async function GET() {
   let dynamicFromKV: string[] = [];
 
   try {
-    const res = await fetch(
-      "https://api.youtubersincome.com/sitemap-keys"
-    );
+    const res = await fetch("https://api.youtubersincome.com/sitemap-keys");
     if (res.ok) {
-      const handles = await res.json();
-      dynamicFromKV = handles
-        .filter((h: string) => h.startsWith("@"))
-        .map((h: string) => `${h.replace(/^@/, "")}-net-worth`);
+      const handles: string[] = await res.json();
+
+      const fetches = handles.map(async (handle) => {
+        try {
+          const kvRes = await fetch(
+            `https://api.youtubersincome.com/kv?handle=${handle}`
+          );
+          if (!kvRes.ok) return null;
+          const data = await kvRes.json();
+          if (data.viewCount && data.viewCount > 100 && data.handle) {
+            return `${data.handle.replace(/^@/, "")}-net-worth`;
+          }
+        } catch {
+          return null;
+        }
+        return null;
+      });
+
+      const results = await Promise.all(fetches);
+      dynamicFromKV = results.filter((slug): slug is string => !!slug);
     } else {
       dynamicFromKV = fallbackDynamicSlugs;
     }
   } catch (err) {
-    console.error("Failed to fetch dynamic slugs from KV:", err);
+    console.error("Failed to fetch dynamic data from KV:", err);
     dynamicFromKV = fallbackDynamicSlugs;
   }
 
