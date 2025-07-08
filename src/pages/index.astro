@@ -36,29 +36,20 @@ function detectInputType(value) {
 // If input exists, process it and redirect to proper page
 if (input) {
   const cleaned = cleanInput(input);
-  const type = detectInputType(cleaned);
+  const apiUrl = `https://api.youtubersincome.com/?channel=${encodeURIComponent(cleaned)}`;
+  const res = await fetch(apiUrl);
+  const data = await res.json();
 
-  if (type === "id") {
-    // If input is a channel ID, fetch info from backend
-    const apiUrl = `https://api.youtubersincome.com/?channel=${cleaned}`;
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-
-    if (data && (data.handle || data.title)) {
-      const baseName = data.handle
-        ? data.handle.replace(/^@+/, "")
-        : data.title.toLowerCase().replace(/\s+/g, "");
-      return Astro.redirect(`/${baseName}-net-worth`, 301);
-    } else {
-      // No data found, go to not-found page
-      return Astro.redirect("/not-found");
-    }
+  if (res.ok && (data.handle || data.title)) {
+    const baseName = data.handle
+      ? data.handle.replace(/^@+/, "")
+      : data.title.toLowerCase().replace(/\s+/g, "");
+    return Astro.redirect(`/${baseName}-net-worth`, 301);
   }
 
-  // If input is a handle or name, clean it and redirect
-  const baseName = cleaned.replace(/\s+/g, "").replace(/^@+/, "");
-  return Astro.redirect(`/${baseName}-net-worth`, 301);
+  return Astro.redirect("/not-found");
 }
+
 ---
 
 <BaseLayout
