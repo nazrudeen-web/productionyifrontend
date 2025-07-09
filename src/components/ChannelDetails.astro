@@ -141,7 +141,7 @@ const faqSchema = {
           src={data.thumbnail}
           alt="Profile"
           class="h-32 w-32 rounded-full border-4 border-white shadow-md object-cover aspect-square bg-white"
-          loading="lazy"
+          loading="eager"
           decoding="async"
           onError={(e) => {
             console.error("profile image failed to load:", e);

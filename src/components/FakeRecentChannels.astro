@@ -1,0 +1,88 @@
+---
+const KEYS_API = "https://api.youtubersincome.com/sitemap-keys";
+const CHANNEL_API = "https://api.youtubersincome.com/kv?handle=";
+
+// Cache to avoid re-fetching every request
+let cachedChannels = globalThis.__recentFakeCache ?? null;
+
+if (!cachedChannels) {
+  try {
+    const res = await fetch(KEYS_API);
+    const keys = await res.json();
+
+    const randomKeys = keys.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    const results = await Promise.all(
+      randomKeys.map((key) =>
+        fetch(`${CHANNEL_API}${encodeURIComponent(key)}`)
+          .then((res) => res.ok ? res.json() : null)
+          .catch(() => null)
+      )
+    );
+
+    cachedChannels = results.filter(Boolean);
+    globalThis.__recentFakeCache = cachedChannels;
+  } catch (e) {
+    console.error("Failed to fetch recent channels:", e);
+    cachedChannels = [];
+  }
+}
+---
+
+{cachedChannels.length > 0 && (
+  <div class="max-w-4xl mx-auto mt-16 px-4 border-b border-divider">
+    <h2 class="text-2xl font-bold mb-2 uppercase text-center">
+      Recently Viewed by Users
+    </h2>
+
+    <!-- Description -->
+    <p class="text-center text-gray-600 mb-12 text-base">
+      Explore trending YouTube creators users are searching for right now.
+    </p>
+
+    <!-- Grid of Channels -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6">
+      {cachedChannels.map((channel, index) => (
+        <a
+          href={`/${channel.handle.replace(/^@/, "")}-net-worth`}
+          class="flex flex-col items-center text-center hover:underline"
+          key={channel.handle}
+        >
+          <img
+            src={channel.thumbnail}
+            alt={`${channel.title} Profile`}
+            width={80}
+            height={80}
+            class="w-20 h-20 rounded-full object-cover shadow-md"
+            loading={index < 2 ? "eager" : "lazy"}
+          />
+          <span class="mt-2 font-medium text-gray-800">{channel.title}</span>
+        </a>
+      ))}
+    </div>
+
+    <!-- View More Button -->
+    <div class="mt-8 text-center pb-16">
+      <a
+        href="/top-channels"
+        class="inline-flex items-center gap-2 rounded-lg bg-tPrimary px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+        View More Channels
+      </a>
+    </div>
+  </div>
+)}

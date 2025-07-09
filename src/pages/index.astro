@@ -3,9 +3,11 @@ import "../styles/global.css";
 import BaseLayout from "../layout/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import FakeRecentChannels from "../components/FakeRecentChannels.astro";
 import TopChannels from "../components/TopChannels.astro";
 import Footer from "../components/Footer.astro";
 import HowItWorks from "../components/HowItWorks.astro";
+import Faq from '../components/Faq.astro';
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -59,7 +61,9 @@ if (input) {
 >
   <Header />
   <Hero />
+  <FakeRecentChannels/>
   <TopChannels />
   <HowItWorks />
+  <Faq/>
   <Footer />
 </BaseLayout>

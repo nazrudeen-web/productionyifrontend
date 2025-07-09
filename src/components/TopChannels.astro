@@ -1,17 +1,48 @@
 ---
 import { fetchTopChannels } from "../data/topChannelsFetch";
-const results = (await fetchTopChannels())
+const results = (await fetchTopChannels()).slice(0, 5); // Only show top 5
+
+const countries = [
+  { name: "🌐 Global", slug: "" },
+  // { name: "🇺🇸 United States", slug: "united-states" },
+  // { name: "🇮🇳 India", slug: "india" },
+  // { name: "🇬🇧 United Kingdom", slug: "united-kingdom" },
+  // { name: "🇧🇷 Brazil", slug: "brazil" },
+  // { name: "🇯🇵 Japan", slug: "japan" },
+  // { name: "🇨🇦 Canada", slug: "canada" }
+];
 ---
 
 <div class="max-w-4xl mx-auto mt-16 px-4 border-b border-divider">
-  <h2 class="text-2xl font-bold mb-2 uppercase text-center">
-    Top YouTube Channels
-  </h2>
+  <div
+    class="flex flex-col items-center mb-6 gap-2 sm:flex-row sm:justify-between"
+  >
+    <h2 class="text-2xl font-bold uppercase text-center sm:text-left">
+      Top YouTube Channels
+    </h2>
+    <!-- Country Dropdown -->
+    <select
+      class="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400"
+      onchange="if(this.value) location.href=this.value"
+    >
+      {
+        countries.map((c) => (
+          <option
+            value={c.slug ? `/top-channels/${c.slug}` : "/top-channels"}
+            selected={!c.slug}
+          >
+            {c.name}
+          </option>
+        ))
+      }
+    </select>
+  </div>
 
   <!-- Description -->
   <p class="text-center text-gray-600 mb-12 text-base">
-    Explore the most popular YouTube creators and see how much they might earn
-    from ads.
+    Discover the most popular YouTube creators by region and see how much they
+    may earn from ad revenue. Start with the top global picks or filter by
+    country.
   </p>
 
   <!-- Grid of Channels -->
@@ -29,7 +60,7 @@ const results = (await fetchTopChannels())
             width={80}
             height={80}
             class="w-20 h-20 rounded-full object-cover shadow-md"
-            loading={index < 5 ? "eager" : "lazy"}
+            loading={index < 3 ? "eager" : "lazy"}
           />
           <span class="mt-2 font-medium text-gray-800">{channel.name}</span>
         </a>
