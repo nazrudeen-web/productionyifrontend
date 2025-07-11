@@ -10,23 +10,35 @@ if (!cachedChannels) {
     const res = await fetch(KEYS_API);
     const keys = await res.json();
 
-    const randomKeys = keys.sort(() => 0.5 - Math.random()).slice(0, 5);
+    const fetches = keys.map(async (key) => {
+      try {
+        const res = await fetch(`${CHANNEL_API}${encodeURIComponent(key)}`);
+        if (!res.ok) return null;
+        const data = await res.json();
+        if (data.subscriberCount && data.subscriberCount > 500000) {
+          return data;
+        }
+      } catch {
+        return null;
+      }
+      return null;
+    });
 
-    const results = await Promise.all(
-      randomKeys.map((key) =>
-        fetch(`${CHANNEL_API}${encodeURIComponent(key)}`)
-          .then((res) => res.ok ? res.json() : null)
-          .catch(() => null)
-      )
-    );
+    const allValidChannels = (await Promise.all(fetches)).filter(Boolean);
 
-    cachedChannels = results.filter(Boolean);
+    // Randomly pick 5 from filtered list
+    const randomChannels = allValidChannels
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 5);
+
+    cachedChannels = randomChannels;
     globalThis.__recentFakeCache = cachedChannels;
   } catch (e) {
     console.error("Failed to fetch recent channels:", e);
     cachedChannels = [];
   }
 }
+
 ---
 
 {cachedChannels.length > 0 && (
@@ -46,7 +58,6 @@ if (!cachedChannels) {
         <a
           href={`/${channel.handle.replace(/^@/, "")}-net-worth`}
           class="flex flex-col items-center text-center underline"
-          key={channel.handle}
         >
           <img
             src={channel.thumbnail}

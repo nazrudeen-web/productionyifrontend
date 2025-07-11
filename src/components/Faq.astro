@@ -57,7 +57,7 @@ const faqSchema = {
           <button
             type="button"
             class="w-full flex justify-between items-center p-6 focus:outline-none"
-            aria-expanded="false"
+            aria-expanded={i === 0 ? "true" : "false"}
             aria-controls={`faq-content-${i}`}
             id={`faq-header-${i}`}
           >
@@ -65,7 +65,7 @@ const faqSchema = {
               {faq.question}
             </span>
             <svg
-              class="w-5 h-5 text-gray-500 transition-transform duration-300"
+              class={`w-5 h-5 text-gray-500 transition-transform duration-300 ${i === 0 ? "rotate-180" : ""}`}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -79,12 +79,13 @@ const faqSchema = {
               />
             </svg>
           </button>
+
           <div
             id={`faq-content-${i}`}
             role="region"
             aria-labelledby={`faq-header-${i}`}
             class="faq-answer-container overflow-hidden transition-all duration-300"
-            style="max-height: 0; padding: 0 1.5rem;"
+            style={`max-height: ${i === 0 ? "200px" : "0"}; padding: 0 1.5rem;`}
           >
             <div class="inner px-0 pb-4 text-gray-600">
               <p class="m-0 text-sm md:text-base">{faq.answer}</p>
@@ -125,5 +126,11 @@ const faqSchema = {
         }
       });
     });
+
+    // Set max-height for the first one manually on load
+    const firstContent = document.getElementById("faq-content-0");
+    if (firstContent) {
+      firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+    }
   });
 </script>

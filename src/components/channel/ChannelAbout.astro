@@ -1,0 +1,66 @@
+---
+const { data } = Astro.props;
+
+const publishedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const topics =
+  data.topicCategories?.map((url) => {
+    const name = url.split("/").pop()?.replace(/_/g, " ") || "";
+    return decodeURIComponent(name);
+  }) || [];
+
+const readableTopics =
+  topics.length > 1
+    ? topics.slice(0, -1).join(", ") + " & " + topics.slice(-1)
+    : topics[0] || "Creator";
+
+const countryFull = data.country || "US";
+// Convert country code to full name
+const countryName = new Intl.DisplayNames(["en"], { type: "region" }).of(
+  countryFull
+);
+
+function formatNumber(n) {
+  return new Intl.NumberFormat("en", {
+    notation: "compact",
+    compactDisplay: "short",
+    maximumFractionDigits: 1,
+  }).format(n);
+}
+---
+
+<section class="mx-auto mt-6 max-w-4xl md:rounded-xl bg-white p-6 shadow">
+  <h2 class="text-xl font-semibold text-gray-800">About {data.title}</h2>
+
+  {
+    data.description && data.description.length > 200 ? (
+      <p class="mt-3 text-sm whitespace-pre-line leading-loose text-gray-700 md:text-base md:leading-relaxed">
+        {data.description}
+      </p>
+    ) : (
+      <>
+        <p class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-relaxed">
+          <strong>{data.title}</strong> is a popular YouTube channel best known
+          for its engaging content in the <strong>{readableTopics}</strong>{" "}
+          niche. The channel was launched on <strong>{publishedDate}</strong>{" "}
+          and has since grown a loyal audience of over{" "}
+          <strong>{formatNumber(data.subscriberCount)} subscribers</strong>.
+          With <strong>{formatNumber(data.viewCount)} total views</strong>{" "}
+          across <strong>{data.videoCount} uploaded videos</strong>,{" "}
+          {data.title} continues to be a major presence on the platform.
+        </p>
+        <p class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-8">
+          Created in <strong>{countryName}</strong>, this YouTube channel
+          connects with viewers worldwide through high-quality and consistent
+          content. Whether it's tutorials, vlogs, reviews, or entertainment,{" "}
+          <strong>{data.title}</strong> has built a reputation for delivering
+          videos that educate, entertain, and inspire.
+        </p>
+      </>
+    )
+  }
+</section>

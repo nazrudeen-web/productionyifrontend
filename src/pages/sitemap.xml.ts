@@ -35,7 +35,7 @@ export async function GET() {
           );
           if (!kvRes.ok) return null;
           const data = await kvRes.json();
-          if (data.viewCount && data.viewCount > 100 && data.handle) {
+          if (data.subscriberCount && data.subscriberCount > 1000000 && data.handle) {
             return `${data.handle.replace(/^@/, "")}-net-worth`;
           }
         } catch {

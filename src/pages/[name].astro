@@ -10,6 +10,7 @@ import Footer from "../components/Footer.astro";
 const cleanName = (params.name ?? "").replace(/-net-worth$/, "");
 const apiUrl = `https://api.youtubersincome.com/?channel=@${cleanName}`;
 
+/** @type {any} */
 let data = null;
 let isError = false;
 
@@ -17,6 +18,7 @@ try {
   const response = await fetch(apiUrl);
   data = await response.json();
   // Check for required fields to validate real channel data
+  // @ts-ignore
   if (!data || !data.title || !data.subscriberCount || !data.viewCount) {
     isError = true;
   }
@@ -25,11 +27,15 @@ try {
   isError = true;
 }
 
+// @ts-ignore
 const channelTitle = data?.title ?? "Unknown Channel";
 
-const pageTitle = `${channelTitle} – YouTube Income, Earnings & Stats`;
-const pageDescription = `See how much ${channelTitle} earns from YouTube ads. Includes estimated income, monthly views, and subscriber count.`;
+// @ts-ignore
+const pageTitle = `How Much Does ${channelTitle} Make on YouTube?`;
+// @ts-ignore
+const pageDescription = `Find out how much ${channelTitle} earns from YouTube ads. Includes daily, monthly & yearly income, net worth, views, and subscriber stats.`;
 const pageUrl = `https://youtubersincome.com/${params.name}`;
+// @ts-ignore
 const pageImage = data?.thumbnail ?? null;
 ---
 
