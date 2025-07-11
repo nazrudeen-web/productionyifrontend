@@ -17,7 +17,9 @@ const countries = [
   <div
     class="flex flex-col items-center mb-6 gap-2 sm:flex-row sm:justify-between"
   >
-    <h2 class="text-2xl font-bold uppercase text-center sm:text-left">
+    <h2
+      class="text-xl md:text-2xl font-bold uppercase text-center sm:text-left"
+    >
       Top YouTube Channels
     </h2>
     <!-- Country Dropdown -->
@@ -39,7 +41,7 @@ const countries = [
   </div>
 
   <!-- Description -->
-  <p class="text-center text-gray-600 mb-12 text-base">
+  <p class="text-center text-gray-600 mb-12 text-sm md:text-base">
     Discover the most popular YouTube creators by region and see how much they
     may earn from ad revenue. Start with the top global picks or filter by
     country.
@@ -52,7 +54,6 @@ const countries = [
         <a
           href={`/${channel.slug}`}
           class="flex flex-col items-center text-center hover:underline"
-          key={channel.slug}
         >
           <img
             src={`/images/${channel.slug}.webp`}

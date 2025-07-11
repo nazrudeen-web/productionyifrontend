@@ -127,10 +127,7 @@ const faqSchema = {
             class="h-full w-full object-cover"
             loading="lazy"
             decoding="async"
-            onError={(e) => {
-              console.error("Banner image failed to load:", e);
-              e.currentTarget.style.display = "none";
-            }}
+            onerror="console.error('Banner image failed to load:', event); this.style.display = 'none';"
           />
         ) : null
       }
@@ -141,12 +138,8 @@ const faqSchema = {
           src={data.thumbnail}
           alt="Profile"
           class="h-32 w-32 rounded-full border-4 border-white shadow-md object-cover aspect-square bg-white"
-          loading="eager"
           decoding="async"
-          onError={(e) => {
-            console.error("profile image failed to load:", e);
-            e.currentTarget.style.display = "none";
-          }}
+          onerror="console.error('profile image failed to load:', event); this.style.display = 'none';"
         />
       </div>
     </div>
@@ -369,7 +362,6 @@ const faqSchema = {
         <a
           href={`/${channel.slug}`}
           class="flex flex-col items-center text-center hover:underline"
-          key={channel.slug}
         >
           <img
             src={`/images/${channel.slug}.webp`}

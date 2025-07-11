@@ -2,98 +2,128 @@
 const faqs = [
   {
     question: "How does this site estimate YouTube channel income?",
-    answer: "We analyze public YouTube data like monthly views and estimate income based on average CPM (cost per 1,000 views). Our goal is to give you a fast, free insight into potential ad earnings."
+    answer:
+      "We analyze public YouTube data like monthly views and estimate income based on average CPM (cost per 1,000 views). Our goal is to give you a fast, free insight into potential ad earnings.",
   },
   {
     question: "Are these earnings 100% accurate?",
-    answer: "No — these are just estimates. Real income can vary based on the niche, audience country, CPM rates, sponsorships, and more. But our tool gives a solid starting point based on public data."
+    answer:
+      "No — these are just estimates. Real income can vary based on the niche, audience country, CPM rates, sponsorships, and more. But our tool gives a solid starting point based on public data.",
   },
   {
     question: "What channels are included in the Top list?",
-    answer: "The top channels are selected based on global popularity, view count, and subscriber metrics. We also rotate channels to keep the list fresh and engaging."
+    answer:
+      "The top channels are selected based on global popularity, view count, and subscriber metrics. We also rotate channels to keep the list fresh and engaging.",
   },
   {
     question: "Do I need to log in or pay to use this?",
-    answer: "Not at all! This tool is 100% free and doesn't require any signup. Just enter a channel name or browse the list to explore estimated YouTube earnings."
+    answer:
+      "Not at all! This tool is 100% free and doesn't require any signup. Just enter a channel name or browse the list to explore estimated YouTube earnings.",
   },
   {
     question: "Can I search by @handle or channel URL?",
-    answer: "Yes — you can search by channel name, @handle, or even paste the full YouTube channel URL. We'll do the work to clean it and redirect you to the right earnings page."
-  }
+    answer:
+      "Yes — you can search by channel name, @handle, or even paste the full YouTube channel URL. We'll do the work to clean it and redirect you to the right earnings page.",
+  },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
 ---
 
-<section class="max-w-4xl mx-auto px-4 py-16">
-  <h2 class="text-xl font-bold uppercase text-center mb-4">
+<section class="max-w-4xl mx-auto px-4 py-12 border-b border-divider">
+  <h2 class="text-xl font-bold uppercase text-center mb-4 md:text-2xl">
     Frequently Asked Questions
   </h2>
-  <p class="text-center text-gray-600 mb-10 max-w-xl mx-auto text-base">
-    Have questions about how our YouTube earnings estimator works? Find quick answers below to get the most out of the tool.
+  <p class="text-center text-gray-600 mb-10 mx-auto text-sm md:text-base">
+    Have questions about how our YouTube earnings estimator works? Find quick
+    answers below to get the most out of the tool.
   </p>
 
   <div class="space-y-4" id="faq-accordion">
-    {faqs.map((faq, i) => (
-      <div class="border border-gray-200  rounded-lg shadow-sm bg-white" key={i}>
-        <button
-          type="button"
-          class="w-full flex justify-between items-center p-6 focus:outline-none"
-          aria-expanded="false"
-          aria-controls={`faq-content-${i}`}
-          id={`faq-header-${i}`}
-        >
-          <span class="text-left text-gray-800 font-semibold text-lg">{faq.question}</span>
-          <svg
-            class="w-5 h-5 text-gray-500 transition-transform duration-300"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    {
+      faqs.map((faq, i) => (
+        <div class="border border-gray-200 rounded-lg shadow-sm bg-white">
+          <button
+            type="button"
+            class="w-full flex justify-between items-center p-6 focus:outline-none"
+            aria-expanded="false"
+            aria-controls={`faq-content-${i}`}
+            id={`faq-header-${i}`}
           >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div
-  id={`faq-content-${i}`}
-  role="region"
-  aria-labelledby={`faq-header-${i}`}
-  class="faq-answer-container overflow-hidden transition-all duration-300"
-  style="max-height: 0; padding: 0 1.5rem;"
->
-  <div class="inner px-0 pb-4 text-gray-600">
-    <p class="m-0">{faq.answer}</p>
-  </div>
-</div>
-
-      </div>
-    ))}
+            <span class="text-left text-gray-800 font-semibold text-base md:text-lg">
+              {faq.question}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-transform duration-300"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            id={`faq-content-${i}`}
+            role="region"
+            aria-labelledby={`faq-header-${i}`}
+            class="faq-answer-container overflow-hidden transition-all duration-300"
+            style="max-height: 0; padding: 0 1.5rem;"
+          >
+            <div class="inner px-0 pb-4 text-gray-600">
+              <p class="m-0 text-sm md:text-base">{faq.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('#faq-accordion button');
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const content = document.getElementById(button.getAttribute('aria-controls'));
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("#faq-accordion button");
 
-      // Close all
-      buttons.forEach(btn => {
-        btn.setAttribute('aria-expanded', 'false');
-        const c = document.getElementById(btn.getAttribute('aria-controls'));
-        c.style.maxHeight = '0';
-        btn.querySelector('svg')?.classList.remove('rotate-180');
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const content = document.getElementById(
+          button.getAttribute("aria-controls")
+        );
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+        // Close all
+        buttons.forEach((btn) => {
+          btn.setAttribute("aria-expanded", "false");
+          const c = document.getElementById(btn.getAttribute("aria-controls"));
+          c.style.maxHeight = "0";
+          btn.querySelector("svg")?.classList.remove("rotate-180");
+        });
+
+        // Open clicked one if not already open
+        if (!isExpanded) {
+          button.setAttribute("aria-expanded", "true");
+          content.style.maxHeight = content.scrollHeight + "px";
+          button.querySelector("svg")?.classList.add("rotate-180");
+        }
       });
-
-      // Open clicked one if not already open
-      if (!isExpanded) {
-        button.setAttribute('aria-expanded', 'true');
-        content.style.maxHeight = content.scrollHeight + 'px';
-        button.querySelector('svg')?.classList.add('rotate-180');
-      }
     });
   });
-});
-
 </script>

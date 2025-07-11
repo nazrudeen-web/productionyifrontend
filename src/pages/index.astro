@@ -7,7 +7,9 @@ import FakeRecentChannels from "../components/FakeRecentChannels.astro";
 import TopChannels from "../components/TopChannels.astro";
 import Footer from "../components/Footer.astro";
 import HowItWorks from "../components/HowItWorks.astro";
-import Faq from '../components/Faq.astro';
+import Faq from "../components/Faq.astro";
+import About from "../components/About.astro";
+import BlogPreview from "../components/BlogPreview.astro";
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -51,19 +53,20 @@ if (input) {
 
   return Astro.redirect("/not-found");
 }
-
 ---
 
 <BaseLayout
-  pageTitle="YouTube Channel Earnings – Find Out How Much They Make"
-  pageDescription="Explore how much top YouTubers earn from ads. Search by channel name or @handle to get fast income estimates. 100% free and easy to use."
+  pageTitle="YouTube Income Estimator – Check How Much Money Any Channel Makes"
+  pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income. Fast, free, and accurate."
   pageUrl="https://youtubersincome.com"
 >
   <Header />
   <Hero />
-  <FakeRecentChannels/>
+  <FakeRecentChannels />
   <TopChannels />
+  <BlogPreview />
   <HowItWorks />
-  <Faq/>
+  <Faq />
+  <About />
   <Footer />
 </BaseLayout>
