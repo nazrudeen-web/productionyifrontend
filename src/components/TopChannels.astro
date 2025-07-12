@@ -1,16 +1,9 @@
 ---
 import { fetchTopChannels } from "../data/topChannelsFetch";
+import CountriesList from "./CountriesList.astro";
 const results = (await fetchTopChannels()).slice(0, 5); // Only show top 5
 
-const countries = [
-  { name: "🌐 Global", slug: "" },
-  // { name: "🇺🇸 United States", slug: "united-states" },
-  // { name: "🇮🇳 India", slug: "india" },
-  // { name: "🇬🇧 United Kingdom", slug: "united-kingdom" },
-  // { name: "🇧🇷 Brazil", slug: "brazil" },
-  // { name: "🇯🇵 Japan", slug: "japan" },
-  // { name: "🇨🇦 Canada", slug: "canada" }
-];
+import CountryList from "./CountriesList.astro";
 ---
 
 <div class="max-w-4xl mx-auto mt-16 px-4 border-b border-divider">
@@ -23,21 +16,7 @@ const countries = [
       Top YouTube Channels
     </h2>
     <!-- Country Dropdown -->
-    <select
-      class="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400"
-      onchange="if(this.value) location.href=this.value"
-    >
-      {
-        countries.map((c) => (
-          <option
-            value={c.slug ? `/top-channels/${c.slug}` : "/top-channels"}
-            selected={!c.slug}
-          >
-            {c.name}
-          </option>
-        ))
-      }
-    </select>
+    <CountriesList />
   </div>
 
   <!-- Description -->

@@ -1,0 +1,34 @@
+---
+const countries = [
+  { name: "🌐 Global", slug: "" },
+  { name: "🇺🇸 United States", slug: "united-states" },
+  { name: "🇨🇦 Canada", slug: "canada" },
+  { name: "🇬🇧 United Kingdom", slug: "united-kingdom" },
+  { name: "🇦🇺 Australia", slug: "australia" },
+  { name: "🇩🇪 Germany", slug: "germany" },
+];
+
+const currentSlug = Astro.url.pathname
+  .replace("/top-youtube-channels/", "")
+  .replace("/", "");
+---
+
+<select
+  class="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400"
+  onchange="if(this.value) location.href=this.value"
+>
+  {
+    countries.map((c) => {
+      const optionValue = c.slug
+        ? `/top-youtube-channels/${c.slug}`
+        : "/top-youtube-channels";
+      const isSelected =
+        c.slug === currentSlug || (!c.slug && currentSlug === "");
+      return (
+        <option value={optionValue} selected={isSelected}>
+          {c.name}
+        </option>
+      );
+    })
+  }
+</select>

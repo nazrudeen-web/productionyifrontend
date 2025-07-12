@@ -1,11 +1,19 @@
 export async function GET() {
   const base = "https://youtubersincome.com";
 
-  const staticRoutes = ["/", "/blog", "/top-channels"];
+  const staticRoutes = ["/", "/blog", "/top-youtube-channels"];
 
   const blogSlugs = [
     "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
     "How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
+  ];
+
+  const countrySlugs = [
+    "united-states",
+    "canada",
+    "united-kingdom",
+    "australia",
+    "germany",
   ];
 
   const fallbackDynamicSlugs = [
@@ -55,9 +63,23 @@ export async function GET() {
   }
 
   const urls = [
+    // Static pages
     ...staticRoutes.map((path) => `<url><loc>${base}${path}</loc></url>`),
-    ...blogSlugs.map((slug) => `<url><loc>${base}/blog/${slug}</loc></url>`),
-    ...dynamicFromKV.map((slug) => `<url><loc>${base}/${slug}</loc></url>`),
+
+    // Blog posts
+    ...blogSlugs.map(
+      (slug) => `<url><loc>${base}/blog/${slug}</loc></url>`
+    ),
+
+    // Country-specific routes
+    ...countrySlugs.map(
+      (slug) => `<url><loc>${base}/top-youtube-channels/${slug}</loc></url>`
+    ),
+
+    // Dynamic net worth pages
+    ...dynamicFromKV.map(
+      (slug) => `<url><loc>${base}/${slug}</loc></url>`
+    ),
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

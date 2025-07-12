@@ -1,11 +1,12 @@
 ---
-// src/pages/top-channels.astro
-import { fetchTopChannels } from "../../data/topChannelsFetch";
-const results = await fetchTopChannels();
+import { fetchGermanyChannels } from "../../../data/topGermany";
+const results = await fetchGermanyChannels();
+// console.log(results1);1
 
-import BaseLayout from "../../layout/BaseLayout.astro";
-import HeaderWithForm from "../../components/HeaderWithForm.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../../layout/BaseLayout.astro";
+import HeaderWithForm from "../../../components/HeaderWithForm.astro";
+import Footer from "../../../components/Footer.astro";
+import CountryList from "../../../components/CountriesList.astro";
 
 function formatNumber(n) {
   return new Intl.NumberFormat("en", {
@@ -38,53 +39,29 @@ function formatUSD(amount) {
     return "$" + formatIncomeNumber(billionAmount) + " billion";
   }
 }
-
-const countries = [
-  { name: "🌐 Global", slug: "" },
-  //   { name: "🇺🇸 United States", slug: "united-states" },
-  //   { name: "🇮🇳 India", slug: "india" },
-  //   { name: "🇬🇧 United Kingdom", slug: "united-kingdom" },
-  //   { name: "🇧🇷 Brazil", slug: "brazil" },
-  //   { name: "🇯🇵 Japan", slug: "japan" },
-  //   { name: "🇨🇦 Canada", slug: "canada" },
-];
 ---
 
 <BaseLayout
-  pageTitle="Top 10 Highest-Earning YouTube Channels in 2025"
-  pageDescription="See the top 10 YouTube channels ranked by estimated monthly income, views, and subscribers. Updated for 2025 — check who’s making the most money!"
-  pageUrl="https://youtubersincome.com/top-channels"
+  pageTitle="Top 10 Highest-Earning YouTube Channels in Germany (2025)"
+  pageDescription="Explore the top 10 YouTube channels in the Germany for 2025. Ranked by estimated monthly income, views, and subscribers. Find out who makes the most money on YouTube in the D.E"
+  pageUrl="https://youtubersincome.com/top-youtube-channels/germany"
 >
   <HeaderWithForm />
   <section class="max-w-4xl mx-auto text-center pt-14 text-tPrimary">
     <div
       class="flex flex-col items-center mb-6 gap-2 sm:flex-row sm:justify-between"
     >
-      <h2 class="text-2xl font-bold uppercase text-center sm:text-left">
-        Top 10 YouTube Channels - 2025
-      </h2>
+      <h1 class="text-2xl font-bold uppercase text-center sm:text-left">
+        Top YouTube Channels in Germany (2025)
+      </h1>
       <!-- Country Dropdown -->
-      <select
-        class="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400"
-        onchange="if(this.value) location.href=this.value"
-      >
-        {
-          countries.map((c) => (
-            <option
-              value={c.slug ? `/top-channels/${c.slug}` : "/top-channels"}
-              selected={!c.slug}
-            >
-              {c.name}
-            </option>
-          ))
-        }
-      </select>
+      <CountryList />
     </div>
     <!-- Description -->
-    <p class="text-center text-gray-600 text-base">
-      Discover the most popular YouTube creators by region and see how much they
-      may earn from ad revenue. Start with the top global picks or filter by
-      country.
+    <p class="text-gray-600 text-base">
+      Discover the top YouTube channels in the Germany, ranked by subscribers,
+      views, and estimated income. This 2025 list highlights the biggest D.E.
+      creators making the most money on YouTube.
     </p>
   </section>
 
@@ -98,7 +75,7 @@ const countries = [
           <div>
             <div class="flex items-center gap-4 mb-4">
               <img
-                src={`/images/${channel.slug}.webp`}
+                src={channel.thumbnail}
                 alt={channel.name}
                 width={64}
                 height={64}

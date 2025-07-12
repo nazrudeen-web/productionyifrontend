@@ -1,15 +1,15 @@
 <section
-  class="border-b border-divider py-8 text-gray-900 md:py-16"
+  class="border-b border-gray-200 md:py-12 text-gray-900"
   style="
-    background-color: #f9f9f9;
-    opacity: 0.8;
-    background-image:  radial-gradient(#000 0.5px, transparent 0.5px), radial-gradient(#000 0.5px, #f9f9f9 0.5px);
-    background-size: 20px 20px;
-    background-position: 0 0,10px 10px;
+    background-color: #f0f2f5;
+    background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px),
+                      radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
+    background-size: 18px 18px;
+    background-position: 0 0, 9px 9px;
   "
 >
   <div
-    class="mx-auto max-w-4xl rounded-xl bg-bcPrimary px-4 py-8 text-center shadow md:py-16 md:px-10"
+    class="mx-auto max-w-4xl md:rounded-xl bg-bcPrimary px-4 py-8 text-center shadow md:py-16 md:px-10"
   >
     <h1
       class="text-xl tracking-tight uppercase font-extrabold text-black font-poppins md:text-3xl"
@@ -20,7 +20,6 @@
       Curious how much YouTubers really earn? Use our free tool to check YouTube
       ad revenue for any channel — fast, accurate, and up-to-date.
     </p>
-
     <!-- Search Form -->
     <form method="get" class="mt-8">
       <div class="flex flex-col items-stretch gap-3 md:flex-row">
@@ -49,57 +48,45 @@
             name="channel"
             id="channel-input"
             placeholder="Example: @username, channel ID, or full YouTube URL"
-            class="w-full bg-bcSecondary rounded-md border border-red-500 py-4 pr-6 pl-10 text-base text-gray-800 shadow-md focus:outline-none focus:!border-accent focus:ring-1 focus:!ring-accent"
+            class="w-full bg-bcSecondary rounded-md border border-red-500 py-4 pr-6 pl-10 text-base text-gray-800 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-
         <!-- CTA Button -->
         <button
           type="submit"
-          class="w-full rounded-md bg-black px-6 py-3 text-base font-medium text-white hover:bg-accent sm:w-auto cursor-pointer tracking-wider"
+          class="w-full rounded-md bg-[#000] px-6 py-3 text-base font-semibold text-white hover:bg-accent sm:w-auto cursor-pointer tracking-wider"
           >Check Income</button
         >
       </div>
     </form>
 
-    <!-- Example tags -->
-    <div
-      class="mt-8 flex flex-wrap justify-center items-center gap-4 text-sm text-black font-medium"
-    >
+    <!-- Suggested Tags -->
+    <div class="mt-6 flex flex-wrap justify-center gap-2 text-sm text-gray-800">
       <button
-        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
-        data-channel="@mrbeast"
+        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
+        data-channel="@mrbeast">@mrbeast</button
       >
-        @mrbeast
-      </button>
       <button
-        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
-        data-channel="TSeries"
+        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
+        data-channel="TSeries">TSeries</button
       >
-        TSeries
-      </button>
       <button
-        class="rounded-md bg-bTag px-4 py-2 hover:bg-gray-300 transition"
+        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
         data-channel="https://www.youtube.com/@pewdiepie"
       >
-        https://youtube.com/@pewdiepie
+        @pewdiepie
       </button>
     </div>
-
-    <p class="mt-8 text-sm text-tPrimary">
-      🛡️ <strong>Powered by the official YouTube API</strong> — real-time, accurate
-      results from YouTube directly.
+    <p class="mt-6 text-sm text-gray-500">
+      🔍 Powered by the official YouTube API — Real-time & accurate.
     </p>
   </div>
 </section>
-
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const tags = document.querySelectorAll("[data-channel]");
     const input = document.getElementById("channel-input");
-
     if (!input) return;
-
     tags.forEach((tag) => {
       tag.addEventListener("click", () => {
         const value = tag.getAttribute("data-channel");
