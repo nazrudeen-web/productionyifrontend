@@ -7,7 +7,7 @@ export const topChannelsList = [
   { handle: "@noelgoescrazy", slug: "noelgoescrazy-net-worth" },
   { handle: "@familybooms", slug: "familybooms-net-worth" },
   { handle: "@talkingangela", slug: "talkingangela-net-worth" },
-  { handle: "@tvkde", slug: "TVKde-net-worth" },
+  { handle: "@tvkde", slug: "tvkde-net-worth" },
   { handle: "@icecreamrolls", slug: "icecreamrolls-net-worth" },
 ];
 

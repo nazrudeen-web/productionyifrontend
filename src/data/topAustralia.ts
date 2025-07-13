@@ -5,7 +5,7 @@ export const topChannelsList = [
   { handle: "@lazarbeam", slug: "lazarbeam-net-worth" },
   { handle: "@ckntoys", slug: "ckntoys-net-worth" },
   { handle: "@howtobasic", slug: "howtobasic-net-worth" },
-  { handle: "@doubledate", slug: "doubledatepodcast-net-worth" },
+  { handle: "@doubledatepodcast", slug: "doubledatepodcast-net-worth" },
   { handle: "@lachlan", slug: "lachlan-net-worth" },
   { handle: "@jasminandjames", slug: "jasminandjames-net-worth" },
   { handle: "@glitch", slug: "glitch-net-worth" },
