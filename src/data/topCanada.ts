@@ -4,7 +4,7 @@ export const topChannelsList = [
   { handle: "@nickpro", slug: "nickpro-net-worth"},
   { handle: "@watchmojo", slug: "watchmojo-net-worth"},
   { handle: "@unboxtherapy", slug: "unboxtherapy-net-worth"},
-  { handle: "@matt.larose", slug: "matt.larose-net-worth"},
+  { handle: "@matt.larose", slug: "mattlarose-net-worth"},
   { handle: "@diaryof4", slug: "diaryof4-net-worth" },
   { handle: "@lukedavidson81", slug: "lukedavidson81-net-worth" },
   { handle: "@linustechtips", slug: "linustechtips-net-worth" },

@@ -1,14 +1,14 @@
 export const topChannelsList = [
-  { handle: "@TsurikiShow", slug: "tsurikishow-net-worth" },
-  { handle: "@Kidibli", slug: "kidibli-net-worth" },
-  { handle: "@Kurzgesagt", slug: "kurzgesagt-net-worth" },
+  { handle: "@tsurikishow", slug: "tsurikishow-net-worth" },
+  { handle: "@kidibli", slug: "kidibli-net-worth" },
+  { handle: "@kurzgesagt", slug: "kurzgesagt-net-worth" },
   { handle: "@boxtoxtv", slug: "boxtoxtv-net-worth" },
-  { handle: "@HaerteTest", slug: "haertetest-net-worth" },
+  { handle: "@haertetest", slug: "haertetest-net-worth" },
   { handle: "@noelgoescrazy", slug: "noelgoescrazy-net-worth" },
-  { handle: "@FAMILYBOOMS", slug: "familybooms-net-worth" },
-  { handle: "@TalkingAngela", slug: "talkingangela-net-worth" },
-  { handle: "@TVKde", slug: "TVKde-net-worth" },
-  { handle: "@IceCreamRolls", slug: "icecreamrolls-net-worth" },
+  { handle: "@familybooms", slug: "familybooms-net-worth" },
+  { handle: "@talkingangela", slug: "talkingangela-net-worth" },
+  { handle: "@tvkde", slug: "TVKde-net-worth" },
+  { handle: "@icecreamrolls", slug: "icecreamrolls-net-worth" },
 ];
 
 export async function fetchGermanyChannels() {

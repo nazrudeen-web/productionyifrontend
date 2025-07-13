@@ -1,14 +1,14 @@
 export const topChannelsList = [
- { handle: "@BouncePatrol", slug: "bouncepatrol-net-worth" },
-  { handle: "@ChloeTing", slug: "chloeting-net-worth" },
+ { handle: "@bouncepatrol", slug: "bouncepatrol-net-worth" },
+  { handle: "@chloeting", slug: "chloeting-net-worth" },
   { handle: "@howridiculous", slug: "howridiculous-net-worth" },
-  { handle: "@LazarBeam", slug: "lazarbeam-net-worth" },
-  { handle: "@CKNToys", slug: "ckntoys-net-worth" },
-  { handle: "@HowToBasic", slug: "howtobasic-net-worth" },
-  { handle: "@DoubleDate", slug: "doubledatepodcast-net-worth" },
-  { handle: "@Lachlan", slug: "lachlan-net-worth" },
-  { handle: "@JasminAndJames", slug: "jasminandjames-net-worth" },
-  { handle: "@GLITCH", slug: "glitch-net-worth" },
+  { handle: "@lazarbeam", slug: "lazarbeam-net-worth" },
+  { handle: "@ckntoys", slug: "ckntoys-net-worth" },
+  { handle: "@howtobasic", slug: "howtobasic-net-worth" },
+  { handle: "@doubledate", slug: "doubledatepodcast-net-worth" },
+  { handle: "@lachlan", slug: "lachlan-net-worth" },
+  { handle: "@jasminandjames", slug: "jasminandjames-net-worth" },
+  { handle: "@glitch", slug: "glitch-net-worth" },
 ];
 
 export async function fetchAustraliaChannels() {
