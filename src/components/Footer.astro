@@ -2,16 +2,38 @@
 import Logo from "./shared/header/Logo.astro";
 ---
 
-<footer class=" bg-gray-950 shadow-inner border-t border-gray-100">
-  <div
-    class="max-w-4xl mx-auto px-6 py-10 text-center flex-col gap-4 flex items-center justify-between md:flex-row"
-  >
-    <!-- Logo or Site Name -->
-    <Logo />
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-100 shadow-inner">
+  <div class="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-6">
+    <!-- Navigation Links (full width, centered) -->
+    <nav class="flex flex-wrap justify-center gap-4 text-sm text-center">
+      <a href="/" class="hover:text-white">Home</a>
+      <a href="/top-youtube-channels" class="hover:text-white"
+        >Top YouTube Channels</a
+      >
+      <a href="/blog" class="hover:text-white">Blogs</a>
+      <a href="/top-youtube-channels/united-states" class="hover:text-white"
+        >United States</a
+      >
+      <a href="/top-youtube-channels/canada" class="hover:text-white">Canada</a>
+      <a href="/top-youtube-channels/united-kingdom" class="hover:text-white"
+        >United Kingdom</a
+      >
+      <a href="/top-youtube-channels/germany" class="hover:text-white"
+        >Germany</a
+      >
+      <a href="/top-youtube-channels/australia" class="hover:text-white"
+        >Australia</a
+      >
+      <!-- <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
+      <a href="/contact" class="hover:text-white">Contact</a> -->
+    </nav>
 
-    <!-- Copyright -->
-    <p class="text-sm text-gray-400">
-      © 2025 ChannelIncome. All rights reserved.
-    </p>
+    <!-- Bottom row: logo left, copyright right -->
+    <div
+      class="flex justify-between items-center text-sm text-gray-500 flex-col gap-4 md:flex-row"
+    >
+      <Logo />
+      <p>© 2025 ChannelIncome. All rights reserved.</p>
+    </div>
   </div>
 </footer>
