@@ -10,14 +10,4 @@ export default defineConfig({
   }),
   site: "https://youtubersincome.com",
   integrations: [tailwind(), react()],
-  vite: {
-    ssr: {
-      external: ['react-dom/server.browser'],
-    },
-    resolve: {
-      alias: {
-        'react-dom/server.browser': 'react-dom/server',
-      },
-    },
-  },
 });
