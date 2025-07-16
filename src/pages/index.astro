@@ -3,7 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layout/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import FakeRecentChannels from "../components/FakeRecentChannels.astro";
+import FakeRecentChannels from "../components/FakeRecentChannels.jsx";
 import TopChannels from "../components/TopChannels.astro";
 import Footer from "../components/Footer.astro";
 import HowItWorks from "../components/HowItWorks.astro";
@@ -62,7 +62,7 @@ if (input) {
 >
   <Header />
   <Hero />
-  <FakeRecentChannels />
+  <FakeRecentChannels client:load />
   <TopChannels />
   <BlogPreview />
   <HowItWorks />

@@ -1,5 +1,5 @@
 // tailwind.config.js
-const typography = require('@tailwindcss/typography');
+// const typography = require('@tailwindcss/typography');
 
 module.exports = {
   content: [
@@ -9,7 +9,7 @@ module.exports = {
     extend: {
        fontFamily: {
         poppins: ['Poppins', 'sans-serif'], // add your custom name
-        sora: ['Sora', 'sans-serif'], // add your custom name
+        geist: ['Geist', 'sans-serif'], // add your custom name
       },
       colors: {
         accent: '#ff0000',

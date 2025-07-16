@@ -6,6 +6,8 @@ export async function GET() {
   const blogSlugs = [
     "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
     "How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
+    "best-youtube-niches-2025",
+    "youtube-cpm-vs-rpm-2025",
   ];
 
   const countrySlugs = [
@@ -43,7 +45,7 @@ export async function GET() {
           );
           if (!kvRes.ok) return null;
           const data = await kvRes.json();
-          if (data.subscriberCount && data.subscriberCount > 1000000 && data.handle) {
+          if (data.subscriberCount && data.subscriberCount > 100000 && data.handle) {
             return `${data.handle.replace(/^@/, "")}-net-worth`;
           }
         } catch {
