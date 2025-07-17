@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layout/BaseLayout.astro";
+import HeaderWithForm from "../components/HeaderWithForm.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  pageTitle="About YoutubersIncome.com"
+  pageDescription="Learn what YoutubersIncome.com is, why it was created, and how it helps you estimate YouTube channel earnings based on views and CPM."
+  pageUrl="https://youtubersincome.com/about"
+>
+  <HeaderWithForm />
+  <section class="max-w-4xl mx-auto py-16 px-6 text-gray-800">
+    <h1 class="text-3xl font-bold mb-6">About YoutubersIncome.com</h1>
+    <p class="mb-4 text-lg">
+      YoutubersIncome.com is a free tool that estimates how much money YouTube
+      channels make based on public data like subscriber count, views, and
+      average CPM (Cost Per 1,000 views).
+    </p>
+    <p class="mb-4 text-lg">
+      Whether you're a fan curious about your favorite creator, or a YouTuber
+      planning your strategy, our platform helps you get a realistic idea of
+      potential ad earnings.
+    </p>
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Why This Site Exists</h2>
+    <p class="mb-4 text-lg">
+      Millions of people search daily to know “How much does this YouTuber
+      earn?” — but answers are often confusing or clickbait. We built this tool
+      to provide quick, honest, and data-driven insights.
+    </p>
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Our Mission</h2>
+    <ul class="list-disc pl-6 text-lg space-y-2">
+      <li>Make YouTube income estimation fast and transparent</li>
+      <li>Help creators understand CPM and monetization potential</li>
+      <li>Provide free tools and guides to grow YouTube channels</li>
+    </ul>
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Who Built This?</h2>
+    <p class="text-lg">
+      This site is built and maintained by a solo indie developer passionate
+      about content creation and education. It's not affiliated with YouTube or
+      Google — just made to help creators like you.
+    </p>
+  </section>
+  <Footer />
+</BaseLayout>

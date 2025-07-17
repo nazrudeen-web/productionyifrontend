@@ -2,38 +2,79 @@
 import Logo from "./shared/header/Logo.astro";
 ---
 
-<footer class="bg-gray-950 text-gray-400 border-t border-gray-100 shadow-inner">
-  <div class="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-6">
-    <!-- Navigation Links (full width, centered) -->
-    <nav class="flex flex-wrap justify-center gap-4 text-sm text-center">
-      <a href="/" class="hover:text-white">Home</a>
-      <a href="/top-youtube-channels" class="hover:text-white"
-        >Top YouTube Channels</a
-      >
-      <a href="/blog" class="hover:text-white">Blogs</a>
-      <a href="/top-youtube-channels/united-states" class="hover:text-white"
-        >United States</a
-      >
-      <a href="/top-youtube-channels/canada" class="hover:text-white">Canada</a>
-      <a href="/top-youtube-channels/united-kingdom" class="hover:text-white"
-        >United Kingdom</a
-      >
-      <a href="/top-youtube-channels/germany" class="hover:text-white"
-        >Germany</a
-      >
-      <a href="/top-youtube-channels/australia" class="hover:text-white"
-        >Australia</a
-      >
-      <!-- <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
-      <a href="/contact" class="hover:text-white">Contact</a> -->
-    </nav>
-
-    <!-- Bottom row: logo left, copyright right -->
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800 shadow-inner">
+  <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col gap-8">
+    <!-- Sectioned Navigation -->
     <div
-      class="flex justify-between items-center text-sm text-gray-500 flex-col gap-4 md:flex-row"
+      class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm text-center sm:text-left"
+    >
+      <!-- Top Channels -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">Top Channels</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="/top-youtube-channels" class="hover:text-white"
+              >Top YouTube Channels - Global</a
+            >
+          </li>
+          <li>
+            <a
+              href="/top-youtube-channels/united-states"
+              class="hover:text-white">Top YouTube Channels – United States</a
+            >
+          </li>
+          <li>
+            <a
+              href="/top-youtube-channels/united-kingdom"
+              class="hover:text-white">Top YouTube Channels – United Kingdom</a
+            >
+          </li>
+          <li>
+            <a href="/top-youtube-channels/canada" class="hover:text-white"
+              >Top YouTube Channels – Canada</a
+            >
+          </li>
+          <li>
+            <a href="/top-youtube-channels/germany" class="hover:text-white"
+              >Top YouTube Channels – Germany</a
+            >
+          </li>
+          <li>
+            <a href="/top-youtube-channels/australia" class="hover:text-white"
+              >Top YouTube Channels – Australia</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">Explore</h3>
+        <ul class="space-y-2">
+          <li><a href="/" class="hover:text-white">Home</a></li>
+          <li><a href="/blog" class="hover:text-white">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">Legal</h3>
+        <ul class="space-y-2">
+          <li><a href="/about" class="hover:text-white">About</a></li>
+          <li>
+            <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom: Logo and Copyright -->
+    <div
+      class="flex justify-between items-center text-sm text-gray-500 flex-col gap-4 md:flex-row border-t border-gray-800 pt-6"
     >
       <Logo />
-      <p>© 2025 ChannelIncome. All rights reserved.</p>
+      <p>© 2025 YoutubersIncome.com. All rights reserved.</p>
     </div>
   </div>
 </footer>

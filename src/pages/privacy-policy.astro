@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layout/BaseLayout.astro";
+import HeaderWithForm from "../components/HeaderWithForm.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  pageTitle="Privacy Policy"
+  pageDescription="Read how YoutubersIncome.com handles your data, cookies, analytics, and privacy practices to keep your information safe and transparent."
+  pageUrl="https://youtubersincome.com/privacy-policy"
+>
+  <HeaderWithForm />
+  <section class="max-w-4xl mx-auto py-16 px-6 text-gray-800">
+    <h1 class="text-3xl font-bold mb-6">Privacy Policy</h1>
+    <p class="mb-4 text-lg">
+      At YoutubersIncome.com, your privacy is important to us. This policy
+      outlines the types of data we collect and how we use it.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">1. Data Collection</h2>
+    <p class="mb-4 text-lg">
+      We do not collect any personally identifiable information. When you use
+      our site, we may log basic anonymous data such as:
+    </p>
+    <ul class="list-disc pl-6 text-lg space-y-2">
+      <li>Browser type</li>
+      <li>IP address (anonymized)</li>
+      <li>Pages visited and time spent</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">2. Cookies</h2>
+    <p class="mb-4 text-lg">
+      We may use cookies or third-party analytics tools (like Google Analytics)
+      to understand how users interact with our site. This helps us improve our
+      content and performance.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">3. Data Usage</h2>
+    <p class="mb-4 text-lg">
+      All data we collect is used solely to improve the website. We do not sell,
+      rent, or share your information with third parties.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">4. External Links</h2>
+    <p class="mb-4 text-lg">
+      Our site may contain links to other websites. We are not responsible for
+      the privacy practices of those websites.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">5. Contact</h2>
+    <p class="text-lg">
+      If you have any questions about this Privacy Policy, feel free to email us
+      at:
+      <a href="mailto:nazrudeen.win@gmail.com" class="text-blue-600 underline"
+        >nazrudeen.win@gmail.com</a
+      >.
+    </p>
+  </section>
+  <Footer />
+</BaseLayout>
