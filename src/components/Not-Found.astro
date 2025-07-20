@@ -1,7 +1,7 @@
 ---
+Astro.response.status = 404;
+
 import BaseLayout from "../layout/BaseLayout.astro";
-import HeaderWithForm from "../components/HeaderWithForm.astro";
-import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout
@@ -9,7 +9,8 @@ import Footer from "../components/Footer.astro";
   pageDescription="The YouTube channel you're looking for doesn’t exist or may have been entered incorrectly."
   pageUrl="https://youtubersincome.com/not-found"
 >
-  <HeaderWithForm />
+
+
   <div class="max-w-2xl mx-auto px-4 py-20 text-center">
     <h1 class="text-4xl font-bold text-red-600 mb-4">
       404 - Channel Not Found
@@ -27,11 +28,9 @@ import Footer from "../components/Footer.astro";
     </a>
 
     <p class="mt-4 text-sm text-gray-500">
-      Need help? Try searching for a different channel or <a
-        href="/top-channels"
-        class="underline hover:text-tPrimary">explore top channels</a
-      >.
+      Need help? Try searching for a different channel or
+      <a href="/top-youtube-channels" class="underline hover:text-tPrimary">explore top channels</a>.
     </p>
   </div>
-  <Footer />
+
 </BaseLayout>

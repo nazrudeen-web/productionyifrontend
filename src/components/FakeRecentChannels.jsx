@@ -33,7 +33,11 @@ export default function FakeRecentChannels() {
   }, []);
 
   if (!channels.length) {
-    return <p className="text-center py-16 text-gray-500">Loading trending channels...</p>;
+    return (
+      <p className="text-center py-16 text-gray-500">
+        Loading trending channels...
+      </p>
+    );
   }
 
   return (
@@ -59,13 +63,15 @@ export default function FakeRecentChannels() {
               className="w-20 h-20 rounded-full object-cover shadow-md"
               loading={index < 2 ? "eager" : "lazy"}
             />
-            <span className="mt-2 font-medium text-gray-800">{channel.title}</span>
+            <span className="mt-2 font-medium text-gray-800">
+              {channel.title}
+            </span>
           </a>
         ))}
       </div>
       <div className="mt-8 text-center">
         <a
-          href="/top-channels"
+          href="/top-youtube-channels"
           className="inline-flex items-center gap-2 rounded-lg bg-tPrimary px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-red-700"
         >
           <svg
@@ -75,7 +81,12 @@ export default function FakeRecentChannels() {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
           View More Channels
         </a>
