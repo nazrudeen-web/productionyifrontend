@@ -1,7 +1,7 @@
 export async function GET() {
   const base = "https://youtubersincome.com";
 
-  const staticRoutes = ["/", "/not-found", "/about", '/privacy-policy', "/blog", "/top-youtube-channels"];
+  const staticRoutes = ["/", "/about", '/privacy-policy', "/blog", "/top-youtube-channels"];
 
   const blogSlugs = [
     "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
