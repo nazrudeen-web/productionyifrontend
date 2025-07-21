@@ -1,7 +1,13 @@
 export async function GET() {
   const base = "https://youtubersincome.com";
 
-  const staticRoutes = ["/", "/about", '/privacy-policy', "/blog", "/top-youtube-channels"];
+  const staticRoutes = [
+    "/",
+    "/about",
+    "/privacy-policy",
+    "/blog",
+    "/top-youtube-channels",
+  ];
 
   const blogSlugs = [
     "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
@@ -45,7 +51,11 @@ export async function GET() {
           );
           if (!kvRes.ok) return null;
           const data = await kvRes.json();
-          if (data.subscriberCount && data.subscriberCount > 100000 && data.handle) {
+          if (
+            data.subscriberCount &&
+            data.subscriberCount > 100000 &&
+            data.handle
+          ) {
             return `${data.handle.replace(/^@/, "")}-net-worth`;
           }
         } catch {
@@ -69,9 +79,7 @@ export async function GET() {
     ...staticRoutes.map((path) => `<url><loc>${base}${path}</loc></url>`),
 
     // Blog posts
-    ...blogSlugs.map(
-      (slug) => `<url><loc>${base}/blog/${slug}</loc></url>`
-    ),
+    ...blogSlugs.map((slug) => `<url><loc>${base}/blog/${slug}</loc></url>`),
 
     // Country-specific routes
     ...countrySlugs.map(
@@ -79,9 +87,7 @@ export async function GET() {
     ),
 
     // Dynamic net worth pages
-    ...dynamicFromKV.map(
-      (slug) => `<url><loc>${base}/${slug}</loc></url>`
-    ),
+    ...dynamicFromKV.map((slug) => `<url><loc>${base}/${slug}</loc></url>`),
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

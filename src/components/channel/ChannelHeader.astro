@@ -47,7 +47,7 @@ const flag = getFlagEmoji(countryFull);
       data.bannerImage ? (
         <img
           src={data.bannerImage}
-          alt="Banner"
+           alt={`Banner image of ${data.title}`}
           class="h-full w-full object-cover"
           loading="lazy"
           decoding="async"
@@ -60,7 +60,9 @@ const flag = getFlagEmoji(countryFull);
     <div class="absolute -bottom-16 left-6 z-10">
       <img
         src={data.thumbnail}
-        alt="Profile"
+        alt={`Profile picture of ${data.title}`}
+        width="128"
+        height="128"
         class="h-32 w-32 rounded-full border-4 border-white shadow-md object-cover aspect-square bg-white"
         decoding="async"
         onerror="console.error('profile image failed to load:', event); this.style.display = 'none';"
