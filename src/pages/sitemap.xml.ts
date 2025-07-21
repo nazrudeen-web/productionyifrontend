@@ -8,14 +8,12 @@ export async function GET() {
     "/blog",
     "/top-youtube-channels",
   ];
-
   const blogSlugs = [
     "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
     "How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
     "best-youtube-niches-2025",
     "youtube-cpm-vs-rpm-2025",
   ];
-
   const countrySlugs = [
     "united-states",
     "canada",
@@ -23,7 +21,6 @@ export async function GET() {
     "australia",
     "germany",
   ];
-
   const fallbackDynamicSlugs = [
     "mrbeast-net-worth",
     "tseries-net-worth",
@@ -37,56 +34,26 @@ export async function GET() {
     "vladandniki-net-worth",
   ];
 
-  let dynamicFromKV: string[] = [];
+  let dynamicFromKV = [];
 
   try {
     const res = await fetch("https://api.youtubersincome.com/sitemap-keys");
     if (res.ok) {
-      const handles: string[] = await res.json();
-
-      const fetches = handles.map(async (handle) => {
-        try {
-          const kvRes = await fetch(
-            `https://api.youtubersincome.com/kv?handle=${handle}`
-          );
-          if (!kvRes.ok) return null;
-          const data = await kvRes.json();
-          if (
-            data.subscriberCount &&
-            data.subscriberCount > 100000 &&
-            data.handle
-          ) {
-            return `${data.handle.replace(/^@/, "")}-net-worth`;
-          }
-        } catch {
-          return null;
-        }
-        return null;
-      });
-
-      const results = await Promise.all(fetches);
-      dynamicFromKV = results.filter((slug): slug is string => !!slug);
+      const handles = await res.json();
+      dynamicFromKV = handles.map((handle) => `${handle}-net-worth`);
     } else {
       dynamicFromKV = fallbackDynamicSlugs;
     }
-  } catch (err) {
-    console.error("Failed to fetch dynamic data from KV:", err);
+  } catch {
     dynamicFromKV = fallbackDynamicSlugs;
   }
 
   const urls = [
-    // Static pages
     ...staticRoutes.map((path) => `<url><loc>${base}${path}</loc></url>`),
-
-    // Blog posts
     ...blogSlugs.map((slug) => `<url><loc>${base}/blog/${slug}</loc></url>`),
-
-    // Country-specific routes
     ...countrySlugs.map(
       (slug) => `<url><loc>${base}/top-youtube-channels/${slug}</loc></url>`
     ),
-
-    // Dynamic net worth pages
     ...dynamicFromKV.map((slug) => `<url><loc>${base}/${slug}</loc></url>`),
   ];
 
@@ -98,6 +65,7 @@ ${urls.join("\n")}
   return new Response(sitemap, {
     headers: {
       "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=86400",
     },
   });
 }
