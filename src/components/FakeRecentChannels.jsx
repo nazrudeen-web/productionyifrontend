@@ -1,4 +1,3 @@
-// src/components/FakeRecentChannels.jsx
 import { useEffect, useState } from "react";
 
 const KEYS_API = "https://api.youtubersincome.com/sitemap-keys";
@@ -16,15 +15,19 @@ export default function FakeRecentChannels() {
         const fetches = keys.map(async (key) => {
           try {
             const res = await fetch(`${CHANNEL_API}${encodeURIComponent(key)}`);
+            if (!res.ok) return null;
             const data = await res.json();
-            return data?.subscriberCount > 500000 ? data : null;
+            return data; // no filtering needed here
           } catch {
             return null;
           }
         });
 
         const results = (await Promise.all(fetches)).filter(Boolean);
+
+        // Shuffle and pick 5 random channels
         const selected = results.sort(() => 0.5 - Math.random()).slice(0, 5);
+
         setChannels(selected);
       } catch (e) {
         console.error(e);
