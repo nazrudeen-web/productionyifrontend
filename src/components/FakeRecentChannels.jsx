@@ -1,7 +1,7 @@
 // src/components/FakeRecentChannels.jsx
 import { useEffect, useState } from "react";
 
-const KEYS_API = "https://api.youtubersincome.com/sitemap-keys";
+const KEYS_API = "https://api.youtubersincome.com/sitemap-keys-all";
 const CHANNEL_API = "https://api.youtubersincome.com/kv?handle=";
 
 export default function FakeRecentChannels() {
