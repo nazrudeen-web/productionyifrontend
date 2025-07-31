@@ -7,6 +7,7 @@ import ChannelHeader from "./channel/ChannelHeader.astro";
 import ChannelStats from "./channel/ChannelStats.astro";
 import ChannelEarnings from "./channel/ChannelEarnings.astro";
 import ChannelAbout from "./channel/ChannelAbout.astro";
+import ChannelEarningsHistory from "./channel/ChannelEarningsHistory.astro";
 
 function formatNumber(n) {
   return new Intl.NumberFormat("en", {
@@ -102,9 +103,24 @@ const faqSchema = {
     },
   })),
 };
+
+const uploadsPlaylistId = "UU" + data.id.slice(2);
 ---
 
 <ChannelHeader data={data} />
+
+<section class="bg-white shadow rounded-2xl p-6 mt-6 max-w-4xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-900 leading-snug">
+    {data.title} YouTube Channel Stats, Earnings & Latest Videos
+  </h1>
+  <p class="mt-2 text-gray-600 text-sm md:text-base">
+    Discover how much {data.title} earns, view daily stats, and explore their newest
+    videos — all in one place.
+  </p>
+</section>
+
+<!-- About the Channel -->
+<ChannelAbout data={data} />
 
 <!-- Stats Box -->
 <ChannelStats data={data} />
@@ -112,36 +128,26 @@ const faqSchema = {
 <!-- Estimated Earnings -->
 <ChannelEarnings data={data} />
 
-<!-- About the Channel -->
-<ChannelAbout data={data} />
+<ChannelEarningsHistory data={data} />
 
-<!-- 5. Channel Growth Paragraph -->
-<section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
-  <h2 class="text-xl font-semibold text-gray-800">Growth Overview</h2>
-  <p
-    class="mt-3 text-sm text-gray-700 leading-loose md:text-base md:leading-relaxed"
-  >
-    Since launching in {publishedDate}, <strong>{data.title}</strong> has grown steadily
-    with {formatNumber(data.subscriberCount)} subscribers and {
-      formatNumber(data.viewCount)
-    } total views across {data.videoCount} videos. That’s an average of {
-      formatNumber(data.viewCount / Math.max(data.videoCount, 1))
-    } views per video — a strong engagement metric in the {readableTopics} niche.
+<section class="mx-auto max-w-4xl bg-white rounded-xl shadow p-6 mt-8">
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">
+    Latest Videos from {data.title}
+  </h2>
+  <p class="text-gray-700 mb-6">
+    Watch the newest videos uploaded by <strong>{data.title}</strong>. Stay
+    up-to-date with their latest content, trending topics, and exclusive
+    releases.
   </p>
-</section>
-
-<!-- 6. Timeline Section -->
-<section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
-  <h2 class="text-xl font-semibold text-gray-800">Channel Timeline</h2>
-  <ul
-    class="mt-3 list-disc list-inside leading-loose text-sm text-gray-700 md:text-base md:leading-relaxed"
-  >
-    <li>🎬 Started: {publishedDate}</li>
-    <li>📈 Subscribers: {formatNumber(data.subscriberCount)}</li>
-    <li>📹 Videos uploaded: {data.videoCount}</li>
-    <li>💰 Monthly income: {formatUSD(data.monthlyIncome)}</li>
-    <li>🌍 Country: {countryName} ({flag})</li>
-  </ul>
+  <div class="relative w-full" style="padding-top: 56.25%;">
+    <iframe
+      src={`https://www.youtube.com/embed?listType=playlist&list=UU${data.id.slice(2)}`}
+      title={`Latest videos playlist of ${data.title}`}
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="absolute top-0 left-0 w-full h-full rounded-md"></iframe>
+  </div>
 </section>
 
 <!-- 8. Blog-Style Section -->

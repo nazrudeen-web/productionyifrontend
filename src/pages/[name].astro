@@ -28,9 +28,18 @@ try {
 if (isError) {
   Astro.response.status = 404;
 }
+
+const year = new Date().getFullYear();
+const siteName = "youtubersincome.com";
+const formattedIncome = (num) => {
+  if (num >= 1e9) return `$${(num / 1e9).toFixed(1)} billion`;
+  if (num >= 1e6) return `$${(num / 1e6).toFixed(1)} million`;
+  return `$${num.toLocaleString()}`;
+};
+
 const channelTitle = data?.title ?? "Unknown Channel";
-const pageTitle = `${channelTitle} Net Worth & YouTube Earnings 2025`;
-const pageDescription = `Discover ${channelTitle}’s 2025 YouTube earnings, net worth, and income from ads, sponsorships, and more.`;
+const pageTitle = `${channelTitle} Net Worth ${year}: How ${formattedIncome(data.yearlyIncome)} Was Built`;
+const pageDescription = `${channelTitle} earns ${formattedIncome(data.monthlyIncome)}/month from YouTube, sponsorships, and business ventures. See full net worth breakdown, income sources, and growth over time.`;
 const pageUrl = `https://youtubersincome.com/${params.name}`;
 const pageImage = data?.thumbnail ?? null;
 ---
