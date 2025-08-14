@@ -10,6 +10,7 @@ import HowItWorks from "../components/HowItWorks.astro";
 import Faq from "../components/Faq.astro";
 import About from "../components/About.astro";
 import BlogPreview from "../components/BlogPreview.astro";
+import HeaderReact from "../components/HeaderReact.jsx";
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -60,13 +61,16 @@ if (input) {
   pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income. Fast, free, and accurate."
   pageUrl="https://youtubersincome.com"
 >
-  <Header />
-  <Hero />
-  <FakeRecentChannels client:only="react" />
-  <TopChannels />
-  <BlogPreview />
-  <HowItWorks />
-  <Faq />
-  <About />
-  <Footer />
+  <main class="min-h-screen bg-background">
+    <!-- <Header /> -->
+    <HeaderReact client:only="react" />
+    <Hero />
+    <FakeRecentChannels client:only="react" />
+    <TopChannels />
+    <BlogPreview />
+    <HowItWorks />
+    <Faq />
+    <About />
+    <Footer />
+  </main>
 </BaseLayout>
