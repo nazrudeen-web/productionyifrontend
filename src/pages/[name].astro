@@ -34,7 +34,7 @@ const siteName = "youtubersincome.com";
 const formattedIncome = (num) => {
   if (num >= 1e9) return `$${(num / 1e9).toFixed(1)} billion`;
   if (num >= 1e6) return `$${(num / 1e6).toFixed(1)} million`;
-  return `$${num.toLocaleString()}`;
+  return `$${num}`;
 };
 
 const channelTitle = data?.title ?? "Unknown Channel";

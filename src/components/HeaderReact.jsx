@@ -4,15 +4,6 @@ import { Menu, X, Calculator, Play, Search } from "lucide-react";
 export default function HeaderReact() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showStickySearch, setShowStickySearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Handle search submit
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim() === "") return;
-    console.log("Searching for:", searchQuery);
-    // You can redirect or fetch search results here
-  };
 
   // Show sticky search after scrolling past hero height
   useEffect(() => {

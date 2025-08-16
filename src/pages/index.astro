@@ -11,6 +11,8 @@ import Faq from "../components/Faq.astro";
 import About from "../components/About.astro";
 import BlogPreview from "../components/BlogPreview.astro";
 import HeaderReact from "../components/HeaderReact.jsx";
+import HeroReact from '../components/HeroReact.jsx';
+import RecentChannels from '../components/RecentChannels.jsx';
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -63,9 +65,11 @@ if (input) {
 >
   <main class="min-h-screen bg-background">
     <!-- <Header /> -->
-    <HeaderReact client:only="react" />
-    <Hero />
-    <FakeRecentChannels client:only="react" />
+    <HeaderReact client:only="react" /> 
+    <!-- <Hero /> -->
+    <HeroReact/>
+    <!-- <FakeRecentChannels client:only="react" /> -->
+     <RecentChannels client:only="react"/>
     <TopChannels />
     <BlogPreview />
     <HowItWorks />
