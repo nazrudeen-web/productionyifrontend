@@ -16,8 +16,8 @@ export default function HeaderReact() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/80 shadow-sm px-4 md:px-32">
-      <div className="container flex h-20 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/80 shadow-sm ">
+      <div className="container max-w-7xl mx-auto flex px-4 h-20 items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center space-x-3 group">
           <div className="relative">

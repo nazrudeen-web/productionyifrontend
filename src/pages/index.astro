@@ -13,6 +13,12 @@ import BlogPreview from "../components/BlogPreview.astro";
 import HeaderReact from "../components/HeaderReact.jsx";
 import HeroReact from '../components/HeroReact.jsx';
 import RecentChannels from '../components/RecentChannels.jsx';
+import { TopChannelsReact } from "../components/TopChannelsReact.jsx";
+import BlogPreviewReact from "../components/BlogPreviewReact.jsx";
+import HowItWorksReact from '../components/HowItWorksReact.jsx';
+import FaqReact from "../components/FaqReact.jsx";
+import AboutReact from '../components/AboutReact.jsx';
+import FooterReact from '../components/FooterReact.jsx';
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -70,11 +76,17 @@ if (input) {
     <HeroReact/>
     <!-- <FakeRecentChannels client:only="react" /> -->
      <RecentChannels client:only="react"/>
-    <TopChannels />
-    <BlogPreview />
-    <HowItWorks />
-    <Faq />
-    <About />
-    <Footer />
+    <!-- <TopChannels /> -->
+     <TopChannelsReact/>
+    <!-- <BlogPreview /> -->
+     <BlogPreviewReact/>
+    <!-- <HowItWorks /> -->
+     <HowItWorksReact/>
+    <!-- <Faq /> -->
+     <FaqReact client:only="react"/>
+    <!-- <About /> -->
+     <AboutReact/>
+    <!-- <Footer /> -->
+     <FooterReact/>
   </main>
 </BaseLayout>

@@ -3,7 +3,6 @@ import { fetchTopChannels } from "../data/topChannelsFetch";
 import CountriesList from "./CountriesList.astro";
 const results = (await fetchTopChannels()).slice(0, 5); // Only show top 5
 
-import CountryList from "./CountriesList.astro";
 ---
 
 <div class="max-w-4xl mx-auto mt-16 px-4 border-b border-divider">

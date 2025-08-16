@@ -7,7 +7,7 @@ export default function HeroReact() {
       <div className="absolute top-10 left-10 w-64 h-64 bg-red-500/10 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
 
-      <div className="container relative px-4 sm:px-6">
+      <div className="container max-w-7xl mx-auto relative px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-4 sm:mb-6">
             <div className="mb-2 sm:mb-3 inline-flex items-center rounded-full border border-red-200 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm shadow-lg">
@@ -46,7 +46,7 @@ export default function HeroReact() {
             </p>
           </div>
 
-          <div className="mb-3 sm:mb-4 mx-auto max-w-2xl px-4 sm:px-0">
+          <div className="mb-3 sm:mb-4 mx-auto max-w-2xl">
             <form method="get" className="mb-2 sm:mb-3">
               <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition-all duration-300">
                 <div className="relative flex-1">

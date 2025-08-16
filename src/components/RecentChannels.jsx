@@ -44,7 +44,7 @@ export default function RecentChannels() {
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-white">
-      <div className="container px-4 sm:px-6">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
             <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
@@ -61,7 +61,7 @@ export default function RecentChannels() {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto shadow-xl bg-white rounded-xl border border-slate-200">
+        <div className="max-w-5xl mx-auto shadow-xl border-1 bg-white rounded-xl border border-slate-200">
           <div className="p-0">
             <div className="divide-y divide-slate-100">
               {channels.map((channel, index) => (
