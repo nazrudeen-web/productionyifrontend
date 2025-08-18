@@ -8,6 +8,15 @@ import ChannelStats from "./channel/ChannelStats.astro";
 import ChannelEarnings from "./channel/ChannelEarnings.astro";
 import ChannelAbout from "./channel/ChannelAbout.astro";
 import ChannelEarningsHistory from "./channel/ChannelEarningsHistory.astro";
+import ChannelHeaderReact from "./channel/ChannelHeaderReact.jsx";
+import ChannelAboutReact from "./channel/ChannelAboutReact.jsx";
+import ChannelEarningsReact from "./channel/ChannelEarningsReact.jsx";
+import ChannelEarningsHistoryReact from "./channel/ChEarningHistoryReact.jsx";
+import LatestVideo from '../components/channel/LatestVideo.jsx';
+import ChannelFaq from '../components/channel/ChannelFaq.jsx';
+import RealtedChannel from '../components/channel/RelatedChannel.jsx';
+
+
 
 function formatNumber(n) {
   return new Intl.NumberFormat("en", {
@@ -107,30 +116,34 @@ const faqSchema = {
 const uploadsPlaylistId = "UU" + data.id.slice(2);
 ---
 
-<ChannelHeader data={data} />
+<ChannelHeaderReact data={data} client:only="react" />
 
-<section class="bg-white shadow rounded-2xl p-6 mt-6 max-w-4xl mx-auto">
-  <h1 class="text-2xl font-bold text-gray-900 leading-snug">
+<section class="border-transparent bg-slate-50 text-slate-900 shadow rounded-2xl p-6 mt-6 hidden">
+  <h1 class="text-2xl font-bold leading-snug">
     {data.title} YouTube Channel Stats, Earnings & Latest Videos
   </h1>
-  <p class="mt-2 text-gray-600 text-sm md:text-base">
+  <p class="mt-2 text-sm md:text-base">
     Discover how much {data.title} earns, view daily stats, and explore their newest
     videos — all in one place.
   </p>
 </section>
 
+    <div class="mt-6 md:mt-8 grid gap-6 md:gap-8 ">
+
 <!-- About the Channel -->
-<ChannelAbout data={data} />
+<ChannelAboutReact data={data} />
 
 <!-- Stats Box -->
-<ChannelStats data={data} />
+<!-- <ChannelStats data={data} /> -->
 
 <!-- Estimated Earnings -->
-<ChannelEarnings data={data} />
+<ChannelEarningsReact data={data} />
 
-<ChannelEarningsHistory data={data} />
+<ChannelEarningsHistoryReact data={data} />
 
-<section class="mx-auto max-w-4xl bg-white rounded-xl shadow p-6 mt-8">
+<LatestVideo data={data}/>
+
+<!-- <section class="mx-auto max-w-4xl bg-white rounded-xl shadow p-6 mt-8">
   <h2 class="text-2xl font-bold text-gray-900 mb-4">
     Latest Videos from {data.title}
   </h2>
@@ -148,10 +161,10 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
       allowfullscreen
       class="absolute top-0 left-0 w-full h-full rounded-md"></iframe>
   </div>
-</section>
+</section> -->
 
 <!-- 8. Blog-Style Section -->
-<section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+<!-- <section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
   <h2 class="text-xl font-semibold text-gray-800">
     Why So Many People Follow {data.title} on YouTube
   </h2>
@@ -171,10 +184,10 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
     }. This focus has helped build a loyal community and steady growth over
     time.
   </p>
-</section>
+</section> -->
 
 <!-- FAQ Section -->
-<section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+<!-- <section class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
   <h2 class="mb-8 text-xl font-semibold text-gray-800">
     Frequently Asked Questions about {data.title}
   </h2>
@@ -223,7 +236,8 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
       ))
     }
   </div>
-</section>
+</section> -->
+<ChannelFaq data={data} client:only="react"/>
 
 <!-- 10. Related Channels -->
 <!-- <div class="mx-auto mt-6 max-w-4xl rounded-xl bg-white p-6 shadow">
@@ -242,7 +256,7 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
   </p>
 </div> -->
 
-<section class="mx-auto my-6 max-w-4xl rounded-xl bg-white p-6 shadow">
+<!-- <section class="mx-auto my-6 max-w-4xl rounded-xl bg-white p-6 shadow">
   <h3 class="text-xl font-semibold text-gray-800">Explore More Channels</h3>
   <p
     class="mt-3 text-sm leading-loose text-gray-700 md:text-base md:leading-relaxed"
@@ -252,7 +266,7 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
     handle or channel ID to get started.
   </p>
 
-  <!-- Grid of Channels -->
+ 
   <div class="grid grid-cols-2 mt-6 sm:grid-cols-4 md:grid-cols-5 gap-6">
     {
       results.map((channel, index) => (
@@ -273,7 +287,7 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
       ))
     }
   </div>
-  <!-- View More Button -->
+
   <div class="mt-8 text-center">
     <a
       href="/top-youtube-channels"
@@ -295,7 +309,11 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
       View More Channels
     </a>
   </div>
-</section>
+</section> -->
+<RealtedChannel data={data} client:only="react" />
+
+</div>
+</div>
 
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 

@@ -5,6 +5,9 @@ import BaseLayout from "../layout/BaseLayout.astro";
 import NotFound from "../components/NotFound.astro"; // make sure this exists
 import ChannelDetails from "../components/ChannelDetails.astro";
 import HeaderWithForm from "../components/HeaderWithForm.astro";
+import HeaderReact from "../components/HeaderReact.jsx";
+import FooterReact from '../components/FooterReact.jsx';
+
 import Footer from "../components/Footer.astro";
 
 const cleanName = (params.name ?? "").replace(/-net-worth$/, "");
@@ -50,13 +53,19 @@ const pageImage = data?.thumbnail ?? null;
   pageUrl={pageUrl}
   pageImage={pageImage}
 >
-  <HeaderWithForm />
+  <HeaderReact client:only="react" /> 
 
+  <main class="max-w-5xl mx-auto min-h-screen ">
+    <div class="px-4 py-6 md:py-8">
   {isError ? (
     <NotFound />
   ) : (
     <ChannelDetails data={data} />
   )}
 
-  <Footer />
+</div>
+
+
+</main>
+<FooterReact/>
 </BaseLayout>
