@@ -4,7 +4,9 @@ title: "YouTube CPM vs RPM in 2025 – What’s the Difference and Why It Matter
 description: "Confused by YouTube metrics like CPM and RPM? This 2025 guide explains what they mean, how they affect your earnings, and how to increase both."
 pubDate: "2025-07-16"
 author: "Nasurudeen"
-export: true
+category: "Guide"
+readTime: "8 min read"
+image: "/blogs/youtube-cpm-rates.png"
 ---
 If you’ve been researching how much YouTubers earn, you’ve probably come across terms like **CPM** and **RPM**.
 

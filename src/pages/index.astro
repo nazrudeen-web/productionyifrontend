@@ -1,24 +1,15 @@
 ---
 import "../styles/global.css";
 import BaseLayout from "../layout/BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import FakeRecentChannels from "../components/FakeRecentChannels.jsx";
-import TopChannels from "../components/TopChannels.astro";
-import Footer from "../components/Footer.astro";
-import HowItWorks from "../components/HowItWorks.astro";
-import Faq from "../components/Faq.astro";
-import About from "../components/About.astro";
-import BlogPreview from "../components/BlogPreview.astro";
 import HeaderReact from "../components/HeaderReact.jsx";
-import HeroReact from '../components/HeroReact.jsx';
-import RecentChannels from '../components/RecentChannels.jsx';
+import HeroReact from "../components/HeroReact.jsx";
+import RecentChannels from "../components/RecentChannels.jsx";
 import { TopChannelsReact } from "../components/TopChannelsReact.jsx";
 import BlogPreviewReact from "../components/BlogPreviewReact.jsx";
-import HowItWorksReact from '../components/HowItWorksReact.jsx';
+import HowItWorksReact from "../components/HowItWorksReact.jsx";
 import FaqReact from "../components/FaqReact.jsx";
-import AboutReact from '../components/AboutReact.jsx';
-import FooterReact from '../components/FooterReact.jsx';
+import AboutReact from "../components/AboutReact.jsx";
+import FooterReact from "../components/FooterReact.jsx";
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -71,22 +62,22 @@ if (input) {
 >
   <main class="min-h-screen bg-background">
     <!-- <Header /> -->
-    <HeaderReact client:only="react" /> 
+    <HeaderReact client:only="react" />
     <!-- <Hero /> -->
-    <HeroReact/>
+    <HeroReact />
     <!-- <FakeRecentChannels client:only="react" /> -->
-     <RecentChannels client:only="react"/>
+    <RecentChannels client:only="react" />
     <!-- <TopChannels /> -->
-     <TopChannelsReact/>
+    <TopChannelsReact />
     <!-- <BlogPreview /> -->
-     <BlogPreviewReact/>
+    <BlogPreviewReact />
     <!-- <HowItWorks /> -->
-     <HowItWorksReact/>
+    <HowItWorksReact />
     <!-- <Faq /> -->
-     <FaqReact client:only="react"/>
+    <FaqReact client:only="react" />
     <!-- <About /> -->
-     <AboutReact/>
+    <AboutReact />
     <!-- <Footer /> -->
-     <FooterReact/>
+    <FooterReact />
   </main>
 </BaseLayout>

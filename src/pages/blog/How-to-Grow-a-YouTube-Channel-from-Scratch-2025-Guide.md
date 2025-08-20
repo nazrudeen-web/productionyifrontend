@@ -4,7 +4,9 @@ title: "Grow a YouTube Channel from Zero – 2025 Beginner Guide"
 description: "Starting a YouTube channel in 2025? Learn how to pick a niche, make content, and grow fast — even with zero subscribers."
 pubDate: 2025-07-07T12:45:00+04:00
 author: "Nasurudeen"
-export: true
+category: "Guide"
+readTime: "7 min read"
+image: "/blogs/youtube-shorts-revenue.png"
 ---
 
 Starting a YouTube channel can feel scary. You might worry about the gear, the

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, ArrowRight } from "lucide-react";
 
-const KEYS_API = "https://api.youtubersincome.com/sitemap-keys-all";
+const KEYS_API = "https://api.youtubersincome.com/sitemap-keys";
 const CHANNEL_API = "https://api.youtubersincome.com/kv?handle=";
 
 export default function RelatedChannel({ data }) {
@@ -20,7 +20,7 @@ export default function RelatedChannel({ data }) {
         const results = await Promise.all(
           allHandles.slice(0, 200).map(async (h) => {
             try {
-              const res = await fetch(`${CHANNEL_API}${h}`);
+              const res = await fetch(`${CHANNEL_API}@${h}`);
               return await res.json();
             } catch {
               return null;

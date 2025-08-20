@@ -2,6 +2,10 @@
 import BaseLayout from "../../layout/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import HeaderReact from "../../components/HeaderReact.jsx";
+import FooterReact from "../../components/FooterReact.jsx";
+import BlogHeader from "../../components/blog/Blog-Header.jsx";
+import BlogCard from "../../components/blog/BlogCard.jsx";
 
 const posts = [
   {
@@ -45,21 +49,21 @@ const isBlog = true;
 ---
 
 <BaseLayout {pageTitle} {pageDescription} {pageUrl} {pageImage} {isBlog}>
-  <Header />
-  <!-- Hero Section -->
-  <section class="text-center py-14 px-2 bg-bcSecondary text-gray-900">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-xl md:text-2xl font-bold mb-4 uppercase">
-        YouTube Earnings Blog & Creator Tips
-      </h1>
-      <p class="text-base max-w-3xl mx-auto text-gray-600">
-        Learn how creators grow income on YouTube. Explore monetization
-        strategies, CPM insights, and channel growth tips.
-      </p>
-    </div>
-  </section>
+  <HeaderReact />
+  <div
+    class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
+  >
+    <BlogHeader />
+    <main class="container mx-auto px-4 py-6 md:py-12">
+      <div class="grid grid-cols-1 gap-6 md:gap-8">
+        <div class="max-w-7xl mx-auto">
+          <BlogCard />
+        </div>
+      </div>
+    </main>
+  </div>
 
-  <main class="max-w-4xl mx-auto px-4 md:px-6 py-10">
+  <!-- <main class="max-w-4xl mx-auto px-4 md:px-6 py-10">
     <h2 class="text-xl font-semibold ml-2 tracking-wide mb-6 text-gray-800">
       Explore the Latest Posts
     </h2>
@@ -83,7 +87,7 @@ const isBlog = true;
         ))
       }
     </ul>
-  </main>
+  </main> -->
 
-  <Footer />
+  <FooterReact />
 </BaseLayout>

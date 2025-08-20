@@ -4,7 +4,9 @@ title: "How Much Do YouTubers Make per 1K Views in 2025?"
 description: "Learn how much YouTubers earn per 1K views in 2025. Get CPM/RPM examples and tips to grow your income."
 pubDate: 2025-07-06T14:45:00+04:00
 author: "Nasurudeen"
-export: true
+category: "Earnings Analysis"
+readTime: "10 min read"
+image: "/blogs/youtube-earnings-chart.png"
 ---
 
 These days, YouTube isn’t just a fun place to watch videos — it’s also a serious way to

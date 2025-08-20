@@ -1,12 +1,22 @@
 ---
 import { fetchGermanyChannels } from "../../../data/topGermany";
-const results = await fetchGermanyChannels();
-// console.log(results1);1
 
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Users,
+  Eye,
+  DollarSign,
+  TrendingUp,
+  ExternalLink,
+  BarChart3,
+} from "lucide-react";
 import BaseLayout from "../../../layout/BaseLayout.astro";
-import HeaderWithForm from "../../../components/HeaderWithForm.astro";
-import Footer from "../../../components/Footer.astro";
-import CountryList from "../../../components/CountriesList.astro";
+import HeaderReact from "../../../components/HeaderReact.jsx";
+import FooterReact from "../../../components/FooterReact.jsx";
+import TopChannelsHeader from "../../../components/top-channel/TopChannelsHeader.jsx";
+import CountryNavigation from "../../../components/top-channel/Country-Navigation.jsx";
 
 function formatNumber(n) {
   return new Intl.NumberFormat("en", {
@@ -16,107 +26,225 @@ function formatNumber(n) {
   }).format(n);
 }
 
-function formatIncomeNumber(num) {
-  const rounded = Math.round(num * 10) / 10; // round to 1 decimal place
-  return Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1);
+// function formatNumber(num) {
+//   if (!num) return "-";
+//   return Intl.NumberFormat("en-US", { notation: "compact" }).format(num);
+// }
+
+function extractCategory(topics) {
+  if (!topics || topics.length === 0) return "General";
+  const last = topics[0].split("/").pop();
+  return last?.replace(/_/g, " ") || "General";
 }
 
-function formatUSD(amount) {
-  if (amount < 1000) {
-    return "$" + amount.toString();
-  } else if (amount < 1000000) {
-    return (
-      "$" +
-      new Intl.NumberFormat("en", {
-        maximumFractionDigits: 0,
-      }).format(amount)
-    );
-  } else if (amount < 1000000000) {
-    const millionAmount = amount / 1000000;
-    return "$" + formatIncomeNumber(millionAmount) + " million";
-  } else {
-    const billionAmount = amount / 1000000000;
-    return "$" + formatIncomeNumber(billionAmount) + " billion";
-  }
+function getFlag(code) {
+  // quick hack: US -> 🇺🇸 etc
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
 }
+
+function formatGrowth(dailyViews) {
+  if (!dailyViews) return "–";
+  return `+${formatNumber(dailyViews)} daily`;
+}
+
+const results = await fetchGermanyChannels();
+const channels = results;
 ---
 
 <BaseLayout
-  pageTitle="Top 10 Highest-Earning YouTube Channels in Germany (2025)"
-  pageDescription="Explore the top 10 YouTube channels in the Germany for 2025. Ranked by estimated monthly income, views, and subscribers. Find out who makes the most money on YouTube in the D.E"
+  pageTitle="Top 10 Highest-Earning YouTube Channels in 2025"
+  pageDescription="See the top 10 YouTube channels ranked by estimated monthly income, views, and subscribers. Updated for 2025 — check who’s making the most money!"
   pageUrl="https://youtubersincome.com/top-youtube-channels/germany"
 >
-  <HeaderWithForm />
-  <section class="max-w-4xl mx-auto text-center pt-14 text-tPrimary">
-    <div
-      class="flex flex-col items-center mb-6 gap-2 sm:flex-row sm:justify-between"
-    >
-      <h1 class="text-2xl font-bold uppercase text-center sm:text-left">
-        Top YouTube Channels in Germany (2025)
-      </h1>
-      <!-- Country Dropdown -->
-      <CountryList />
-    </div>
-    <!-- Description -->
-    <p class="text-gray-600 text-base">
-      Discover the top YouTube channels in the Germany, ranked by subscribers,
-      views, and estimated income. This 2025 list highlights the biggest D.E.
-      creators making the most money on YouTube.
-    </p>
-  </section>
+  <HeaderReact client:only="react" />
 
-  <section class="max-w-4xl mx-auto px-4 py-12 grid gap-6 sm:grid-cols-2">
-    {
-      results.map((channel, index) => (
-        <a
-          href={`/${channel.slug}`}
-          class="bg-white p-5 rounded-2xl shadow-md hover:shadow-lg transition border border-gray-200 flex flex-col justify-between group"
-        >
-          <div>
-            <div class="flex items-center gap-4 mb-4">
-              <img
-                src={channel.thumbnail}
-                alt={channel.name}
-                width={64}
-                height={64}
-                class="w-16 h-16 rounded-full object-cover border border-gray-200"
-                loading={index < 9 ? "eager" : "lazy"}
-              />
-              <div>
-                <h2 class="text-lg font-bold leading-tight text-gray-800">
-                  {index + 1}. {channel.name}
-                </h2>
-                <p class="text-xs text-gray-500">{channel.country}</p>
-              </div>
-            </div>
-
-            <div class="space-y-2 text-sm text-gray-700">
-              <p>
-                <span class="font-medium text-gray-600">Subscribers:</span>{" "}
-                <strong>{formatNumber(channel.subscriberCount)}</strong>
-              </p>
-              <p>
-                <span class="font-medium text-gray-600">Total Views:</span>{" "}
-                <strong>{formatNumber(channel.viewCount)}</strong>
-              </p>
-              <p>
-                <span class="font-medium text-gray-600">Monthly Income:</span>{" "}
-                <strong>{formatUSD(channel.monthlyIncome)}</strong>
+  <div class="bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100">
+    <TopChannelsHeader />
+    <CountryNavigation />
+    <main class="container max-w-7xl mx-auto px-4 py-6 md:py-12">
+      <div class="space-y-6 md:space-y-8">
+        <div class="space-y-4 md:space-y-6">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+          >
+            <div>
+              <h2 class="text-lg md:text-2xl font-bold text-slate-900">
+                Top YouTube Channels Germany
+              </h2>
+              <p class="text-slate-600 mt-1 text-sm md:text-base">
+                Ranked by subscribers and estimated earnings
               </p>
             </div>
+            <Badge
+              variant="outline"
+              className="text-slate-600 font-semibold text-xs md:text-sm self-start sm:self-center"
+            >
+              {channels.length} Channels
+            </Badge>
           </div>
 
-          <div class="mt-4">
-            <span class="inline-block text-red-600 text-sm font-medium group-hover:underline">
-              View Details →
-            </span>
-          </div>
-        </a>
-      ))
-    }
-  </section>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+            {
+              channels.map((channel, index) => (
+                <Card
+                  key={channel.id}
+                  className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-white/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-4 md:p-6">
+                    <div class="space-y-3 md:space-y-4">
+                      {/* Header */}
+                      <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3 flex-1 min-w-0">
+                          <div class="relative flex-shrink-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-200 rounded-full flex items-center justify-center overflow-hidden shadow-md">
+                              <img
+                                src={channel.thumbnail}
+                                alt={channel.title}
+                                class="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
+                          <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2">
+                              <h3 class="font-semibold text-slate-900 truncate text-sm md:text-lg">
+                                {channel.title}
+                              </h3>
+                              <span class="text-lg md:text-xl flex-shrink-0">
+                                {channel.country
+                                  ? getFlag(channel.country)
+                                  : "🌐"}
+                              </span>
+                            </div>
+                            <p class="text-xs md:text-sm text-slate-500 font-medium truncate">
+                              {channel.handle}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="text-right flex-shrink-0">
+                          <div class="text-xl md:text-3xl font-bold text-slate-900 mb-1">
+                            #{index + 1}
+                          </div>
+                          <Badge
+                            variant="outline"
+                            className="text-xs bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-blue-200 font-semibold"
+                          >
+                            {extractCategory(channel.topicCategories)}
+                          </Badge>
+                        </div>
+                      </div>
 
-  <section class="max-w-4xl mx-auto px-4 py-8 text-sm text-gray-700">
+                      {/* Description */}
+                      <p class="text-xs md:text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                        {channel.description}
+                      </p>
+
+                      {/* Stats Grid */}
+                      <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <div class="space-y-2 md:space-y-3">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 md:gap-2 text-slate-600">
+                              <Users className="w-3 h-3 md:w-4 md:h-4" />
+                              <span class="text-xs md:text-sm font-medium">
+                                Subscribers
+                              </span>
+                            </div>
+                            <span class="font-bold text-slate-900 text-xs md:text-sm">
+                              {formatNumber(channel.subscriberCount)}
+                            </span>
+                          </div>
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 md:gap-2 text-slate-600">
+                              <Eye className="w-3 h-3 md:w-4 md:h-4" />
+                              <span class="text-xs md:text-sm font-medium">
+                                Total Views
+                              </span>
+                            </div>
+                            <span class="font-bold text-slate-900 text-xs md:text-sm">
+                              {formatNumber(channel.viewCount)}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="space-y-2 md:space-y-3">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 md:gap-2 text-slate-600">
+                              <DollarSign className="w-3 h-3 md:w-4 md:h-4" />
+                              <span class="text-xs md:text-sm font-medium">
+                                Est. Earnings
+                              </span>
+                            </div>
+                            <span class="font-bold text-green-600 text-xs md:text-sm">
+                              ${formatNumber(channel.yearlyIncome)}
+                            </span>
+                          </div>
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 md:gap-2 text-slate-600">
+                              <TrendingUp className="w-3 h-3 md:w-4 md:h-4" />
+                              <span class="text-xs md:text-sm font-medium">
+                                Growth
+                              </span>
+                            </div>
+                            <span class="font-bold text-green-600 text-xs md:text-sm">
+                              {formatGrowth(channel.avgDailyViews)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Additional Stats */}
+                      <div class="flex items-center justify-between text-xs md:text-sm text-slate-500 pt-2 md:pt-3 border-t border-slate-100">
+                        <span class="font-medium">
+                          {formatNumber(channel.videoCount)} videos
+                        </span>
+                        <span class="font-medium">
+                          {formatNumber(channel.avgDailyViews)} avg daily views
+                        </span>
+                        <span class="font-medium text-green-600">
+                          ${formatNumber(channel.monthlyIncome)}/month
+                        </span>
+                      </div>
+
+                      {/* Actions */}
+                      <div class="flex gap-2 pt-2 md:pt-3">
+                        <a href={`/${channel.slug}`} class="flex-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full group-hover:border-red-200 group-hover:text-red-600 bg-white/50 hover:bg-red-50 transition-all duration-200 font-semibold text-xs md:text-sm"
+                          >
+                            <BarChart3 className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                            <span class="hidden sm:inline">View Analytics</span>
+                            <span class="sm:hidden">Analytics</span>
+                          </Button>
+                        </a>
+                        <a
+                          href={`https://www.youtube.com/${channel.handle}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="px-2 md:px-3 group-hover:border-red-200 group-hover:text-red-600 bg-white/50 hover:bg-red-50 transition-all duration-200"
+                          >
+                            <ExternalLink className="w-3 h-3 md:w-4 md:h-4" />
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- <TopChannels /> -->
+
+  <section class="max-w-7xl mx-auto px-4 py-8 text-sm text-gray-700">
     <h2 class="text-lg font-semibold mb-2">About This Ranking</h2>
     <p>
       This list is based on publicly available YouTube statistics and estimated
@@ -124,5 +252,5 @@ function formatUSD(amount) {
       merchandise, and other monetization methods.
     </p>
   </section>
-  <Footer />
+  <FooterReact />
 </BaseLayout>

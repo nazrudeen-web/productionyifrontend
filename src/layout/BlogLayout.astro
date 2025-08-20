@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import HeaderReact from "../components/HeaderReact.jsx";
+import FooterReact from "../components/FooterReact.jsx";
+import BlogPostLayout from "../components/blog/BlogPostLayout.jsx";
 
 const { frontmatter } = Astro.props;
 const { title, author, description } = frontmatter;
@@ -23,16 +24,20 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleString("en-US", {
 ---
 
 <BaseLayout {pageTitle} {pageDescription} {pageUrl} {pageImage} {isBlog}>
-  <Header />
-  <main class="max-w-4xl mx-auto px-4 md:px-6 py-16 text-gray-800">
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">{title}</h1>
-    <p class="text-sm text-gray-500 mb-6">By {author} · {formattedDate}</p>
+  <HeaderReact />
+  <div
+    class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
+  >
+    <main class="container max-w-7xl mx-auto px-4 py-6 md:py-12">
+      <div class="grid grid-cols-1 gap-6 md:gap-8">
+        <div class="max-w-5xl mx-auto">
+          <BlogPostLayout frontmatter={frontmatter}>
+            <slot />
+          </BlogPostLayout>
+        </div>
+      </div>
+    </main>
+  </div>
 
-    <article
-      class="prose prose-red prose-base max-w-none prose-headings:text-gray-800 prose-a:text-gray-800 hover:prose-a:text-gray-700 prose-strong:text-gray-900 prose-blockquote:border-red-400 prose-blockquote:text-gray-700 prose-img:rounded-xl prose-table:border prose-table:border-gray-300"
-    >
-      <slot />
-    </article>
-  </main>
-  <Footer />
+  <FooterReact />
 </BaseLayout>
