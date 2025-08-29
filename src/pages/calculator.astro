@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layout/BaseLayout.astro";
+import HeaderReact from "../components/HeaderReact.jsx";
+import FooterReact from "../components/FooterReact.jsx";
+import CalculatorHeader from "@/components/calculator/CalculatorHeader.astro";
+import CalculatorWrapper from "../components/calculator/CalculatorWrapper.jsx";
+---
+
+<BaseLayout
+  pageTitle="YouTube Income Estimator – Check How Much Money Any Channel Makes"
+  pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income."
+  pageUrl="https://youtubersincome.com"
+>
+  <HeaderReact client:load />
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <CalculatorHeader />
+    <main class="container mx-auto px-4 py-6 md:py-8">
+      <!-- This will hydrate a React wrapper that holds the form + results -->
+      <CalculatorWrapper client:load />
+    </main>
+  </div>
+  <FooterReact />
+</BaseLayout>
