@@ -3,7 +3,7 @@ import { fetchTopChannels } from "../data/topChannelsFetch";
 import { getReadableTopics, formatNumber, formatUSD } from "../utils/helper.js";
 const topChannels = (await fetchTopChannels()).slice(0, 5); // Only show top 5
 
-export function TopChannelsReact() {
+export default function TopChannelsReact() {
   return (
     <section id="top-channels" className="py-12 md:py-20 bg-slate-50/50">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">

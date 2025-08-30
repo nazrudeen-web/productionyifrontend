@@ -4,7 +4,7 @@ import BaseLayout from "../layout/BaseLayout.astro";
 import HeaderReact from "../components/HeaderReact.jsx";
 import HeroReact from "../components/HeroReact.jsx";
 import RecentChannels from "../components/RecentChannels.jsx";
-import { TopChannelsReact } from "../components/TopChannelsReact.jsx";
+import TopChannelsReact  from "../components/TopChannelsReact.jsx";
 import BlogPreviewReact from "../components/BlogPreviewReact.jsx";
 import HowItWorksReact from "../components/HowItWorksReact.jsx";
 import FaqReact from "../components/FaqReact.jsx";
@@ -68,7 +68,7 @@ if (input) {
     <!-- <FakeRecentChannels client:only="react" /> -->
     <RecentChannels client:only="react" />
     <!-- <TopChannels /> -->
-    <TopChannelsReact />
+    <TopChannelsReact  client:only="react"/>
     <!-- <BlogPreview /> -->
     <BlogPreviewReact />
     <!-- <HowItWorks /> -->
