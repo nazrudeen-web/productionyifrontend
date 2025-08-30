@@ -19,18 +19,18 @@ export default function HeaderReact() {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/80 shadow-sm ">
       <div className="container max-w-7xl mx-auto flex px-4 h-20 items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center space-x-3 group">
+        <a href="/" className="flex items-center space-x-2 sm:space-x-3 group">
           <div className="relative">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-700 shadow-lg group-hover:shadow-xl transition-all duration-200">
-              <Play className="h-5 w-5 text-white fill-white" />
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-red-600 to-red-700 shadow-lg group-hover:shadow-xl transition-all duration-200">
+              <Play className="h-4 w-4 sm:h-5 sm:w-5 text-white fill-white" />
             </div>
-            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></div>
+            <div className="absolute -top-1 -right-1 h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-green-500 border-2 border-white"></div>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-xl text-slate-900 leading-tight">
+            <span className="font-bold text-lg sm:text-xl text-slate-900 leading-tight">
               YouTubers Income
             </span>
-            <span className="text-xs text-slate-500 font-medium">
+            <span className="text-[10px] sm:text-xs text-slate-500 font-medium">
               Analytics & Insights
             </span>
           </div>
