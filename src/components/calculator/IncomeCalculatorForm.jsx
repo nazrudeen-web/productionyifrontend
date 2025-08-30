@@ -157,7 +157,7 @@ export default function IncomeCalculatorForm({
         {/* Button */}
         <button
           onClick={onCalculate}
-          className="w-full bg-blue-600 text-white rounded-lg py-2 mt-3 hover:bg-blue-700"
+          className="flex items-center bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md shadow-lg hover:shadow-xl transition-all duration-200 font-medium"
         >
           Calculate
         </button>
