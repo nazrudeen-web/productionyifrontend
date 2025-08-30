@@ -2,10 +2,19 @@ import { Search, ArrowRight, Sparkles } from "lucide-react";
 
 export default function HeroReact() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-red-50/30 to-slate-50 py-6 sm:py-8 md:py-10">
-      <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10"></div>
-      <div className="absolute top-10 left-10 w-64 h-64 bg-red-500/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+    <section className="relative overflow-hidden bg-gradient-to-b from-red-50 via-white to-blue-50 py-10 sm:py-14 md:py-20">
+      {/* Grid */}
+      <div
+        className="absolute inset-0 -z-10 
+      bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 fill=%22none%22 stroke=%22%23d1d5db%22 stroke-width=%221%22><path d=%22M20 0H0v20%22/></svg>')]
+      opacity-60"
+      ></div>
+
+      {/* Stronger Red Glow */}
+      <div className="absolute top-16 left-16 w-72 h-72 bg-red-500/30 rounded-full blur-2xl -z-10"></div>
+
+      {/* Stronger Blue Glow */}
+      <div className="absolute bottom-16 right-16 w-96 h-96 bg-blue-500/20 rounded-full blur-2xl -z-10"></div>
 
       <div className="container max-w-7xl mx-auto relative px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
