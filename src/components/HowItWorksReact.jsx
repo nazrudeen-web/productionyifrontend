@@ -48,10 +48,10 @@ export default function HowItWorksReact() {
                 <div className="mb-3 md:mb-4 inline-flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-lg bg-red-100">
                   <step.icon className="h-5 w-5 md:h-6 md:w-6 text-red-600" />
                 </div>
-                <h3 className="font-semibold mb-2 text-sm md:text-base">
+                <h3 className="font-semibold mb-2 text-base md:text-lg">
                   {step.title}
                 </h3>
-                <p className="text-xs md:text-sm text-slate-600">
+                <p className="text-sm md:text-base text-slate-600">
                   {step.description}
                 </p>
               </div>

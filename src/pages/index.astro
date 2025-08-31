@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
 import BaseLayout from "../layout/BaseLayout.astro";
-import HeaderReact from "../components/HeaderReact.jsx";
-import HeroReact from "../components/HeroReact.jsx";
-import RecentChannels from "../components/RecentChannels.jsx";
-import TopChannelsReact  from "../components/TopChannelsReact.jsx";
+import Header from "../components/Header.jsx";
+import Hero from "@/components/Hero.astro";
+import RecentChannels from "@/components/RecentChannels.astro";
+
+import TopChannelsReact from "../components/TopChannelsReact.jsx";
 import BlogPreviewReact from "../components/BlogPreviewReact.jsx";
 import HowItWorksReact from "../components/HowItWorksReact.jsx";
 import FaqReact from "../components/FaqReact.jsx";
@@ -32,11 +33,6 @@ function cleanInput(raw) {
   return trimmed.replace(/^@+/, "");
 }
 
-// Check if input is YouTube channel ID (starts with UC...) or handle/name
-function detectInputType(value) {
-  return /^UC[a-zA-Z0-9_-]{22}$/.test(value) ? "id" : "handleOrName";
-}
-
 // If input exists, process it and redirect to proper page
 if (input) {
   const cleaned = cleanInput(input);
@@ -61,14 +57,11 @@ if (input) {
   pageUrl="https://youtubersincome.com"
 >
   <main class="min-h-screen bg-background">
-    <!-- <Header /> -->
-    <HeaderReact client:only="react" />
-    <!-- <Hero /> -->
-    <HeroReact />
-    <!-- <FakeRecentChannels client:only="react" /> -->
-    <RecentChannels client:only="react" />
+    <Header client:load />
+    <Hero />
+    <RecentChannels />
     <!-- <TopChannels /> -->
-    <TopChannelsReact  client:only="react"/>
+    <TopChannelsReact client:load />
     <!-- <BlogPreview /> -->
     <BlogPreviewReact />
     <!-- <HowItWorks /> -->

@@ -55,10 +55,10 @@ export default function AboutReact() {
                   <div className="mb-2 md:mb-3 inline-flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-red-100">
                     <feature.icon className="h-4 w-4 md:h-5 md:w-5 text-red-600" />
                   </div>
-                  <h3 className="font-semibold mb-1 md:mb-2 text-xs md:text-sm">
+                  <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-sm text-slate-600">
                     {feature.description}
                   </p>
                 </div>

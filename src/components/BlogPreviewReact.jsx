@@ -51,40 +51,42 @@ export default function BlogPreviewReact() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {blogPosts.map((post, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow">
-              <div className="aspect-video overflow-hidden rounded-t-lg">
-                <img
-                  src={post.image || "/placeholder.svg"}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="secondary">{post.category}</Badge>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Calendar className="h-3 w-3" />
-                    {post.date}
-                  </div>
+              <a href={`${post.href}`}>
+                <div className="aspect-video overflow-hidden rounded-t-lg">
+                  <img
+                    src={post.image || "/placeholder.svg"}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <CardTitle className="text-base md:text-lg leading-tight">
-                  {post.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <p className="text-sm text-muted-foreground mb-4">
-                  {post.excerpt}
-                </p>
-                <a href={`${post.href}`}>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="p-0 h-auto font-medium"
-                  >
-                    Read More
-                    <ArrowRight className="ml-1 h-3 w-3" />
-                  </Button>
-                </a>
-              </CardContent>
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{post.category}</Badge>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Calendar className="h-3 w-3" />
+                      {post.date}
+                    </div>
+                  </div>
+                  <CardTitle className="text-base md:text-lg leading-tight">
+                    {post.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {post.excerpt}
+                  </p>
+                  <a href={`${post.href}`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="p-0 h-auto font-medium"
+                    >
+                      Read More
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </Button>
+                  </a>
+                </CardContent>
+              </a>
             </Card>
           ))}
         </div>

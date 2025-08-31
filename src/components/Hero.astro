@@ -1,107 +1,148 @@
+---
+import { Search, ArrowRight, Sparkles } from "lucide-react";
+---
+
 <section
-  class="border-b border-gray-200 md:py-12 text-gray-900 text-base"
-  style="
-    background-color: #f0f2f5;
-    background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px),
-                      radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
-    background-size: 18px 18px;
-    background-position: 0 0, 9px 9px;
-  "
+  class="relative overflow-hidden bg-gradient-to-b from-red-50 via-white to-blue-50 py-10 sm:py-14 md:py-20"
 >
+  {/* Grid */}
   <div
-    class="mx-auto max-w-4xl md:rounded-xl bg-bcPrimary px-4 py-8 text-center shadow md:py-16 md:px-10"
+    class="absolute inset-0 -z-10
+      bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 fill=%22none%22 stroke=%22%23d1d5db%22 stroke-width=%221%22><path d=%22M20 0H0v20%22/></svg>')]
+      opacity-60"
   >
-    <h1
-      class="text-xl tracking-tight uppercase font-extrabold text-black font-poppins md:text-3xl"
-    >
-      Discover How Much YouTubers Make from Ads
-    </h1>
-    <p class="mt-2 text-sm text-gray-600 max-w-2xl mx-auto md:text-base">
-      Curious how much YouTubers really earn? Use our free tool to check YouTube
-      ad revenue for any channel — fast, accurate, and up-to-date.
-    </p>
-    <!-- Search Form -->
-    <form method="get" class="mt-8">
-      <div class="flex flex-col items-stretch gap-3 md:flex-row">
-        <!-- Input with icon on the left -->
-        <div class="relative flex-1">
+  </div>
+
+  {/* Stronger Red Glow */}
+  <div
+    class="absolute top-16 left-16 w-72 h-72 bg-red-500/30 rounded-full blur-2xl -z-10"
+  >
+  </div>
+
+  {/* Stronger Blue Glow */}
+  <div
+    class="absolute bottom-16 right-16 w-96 h-96 bg-blue-500/20 rounded-full blur-2xl -z-10"
+  >
+  </div>
+
+  <div class="container max-w-7xl mx-auto relative px-4 sm:px-6">
+    <div class="mx-auto max-w-4xl">
+      <div class="text-center mb-4 sm:mb-6">
+        <div
+          class="mb-2 sm:mb-3 inline-flex items-center rounded-full border border-red-200 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm shadow-lg"
+        >
+          <Sparkles
+            className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 text-red-600"
+          />
+          <span class="font-semibold text-slate-700">
+            Free YouTube Income Estimator
+          </span>
           <span
-            class="absolute inset-y-0 left-3 flex items-center text-tSecondary"
+            class="ml-1.5 sm:ml-2 rounded-full bg-red-100 px-1.5 sm:px-2 py-0.5 text-xs font-medium text-red-700"
           >
+            100% Free
+          </span>
+        </div>
+
+        <h1
+          class="mb-2 sm:mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 leading-tight"
+        >
+          Discover Top Performing{" "}
+          <span class="relative">
+            <span class="text-red-600">YouTube Channels</span>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              class="absolute -bottom-1 left-0 w-full h-2 text-red-200"
+              viewBox="0 0 300 8"
               fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                d="M2 6C50 2 100 2 150 4C200 6 250 3 298 4"
+                stroke="currentColor"
                 stroke-width="2"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-              ></path>
+                stroke-linecap="round"></path>
             </svg>
           </span>
-          <input
-            type="text"
-            name="channel"
-            id="channel-input"
-            placeholder="Example: channel name, @handle, channel ID, or YouTube URL"
-            class="w-full bg-bcSecondary rounded-md border border-red-500 py-4 pr-6 pl-10 text-base text-gray-800 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <!-- CTA Button -->
-        <button
-          type="submit"
-          class="w-full rounded-md bg-[#000] px-6 py-3 text-base font-semibold text-white hover:bg-accent sm:w-auto cursor-pointer tracking-wider"
-          >Check Income</button
-        >
-      </div>
-    </form>
+        </h1>
 
-    <!-- Suggested Tags -->
-    <div class="mt-6 flex flex-wrap justify-center gap-2 text-sm text-gray-800">
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="@mrbeast">@mrbeast</button
-      >
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="TSeries">TSeries</button
-      >
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="https://www.youtube.com/@pewdiepie">@pewdiepie</button
-      >
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="@5MinuteCrafts">@5MinuteCrafts</button
-      >
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="SETIndia">SET India</button
-      >
-      <button
-        class="px-3 py-1.5 bg-gray-200 rounded hover:bg-gray-300"
-        data-channel="https://www.youtube.com/@MrBeastGaming"
-        >@MrBeastGaming</button
-      >
+        <p
+          class="mb-4 sm:mb-5 text-sm sm:text-base text-slate-600 max-w-xl mx-auto px-4 sm:px-0"
+        >
+          Get instant earnings estimates and analytics for any YouTube channel
+        </p>
+      </div>
+
+      <div class="mb-3 sm:mb-4 mx-auto max-w-2xl">
+        <form method="get" class="mb-2 sm:mb-3">
+          <div
+            class="flex flex-col sm:flex-row gap-2 p-2 bg-white rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition-all duration-300"
+          >
+            <div class="relative flex-1">
+              <Search
+                className="absolute left-3 sm:left-4 top-1/2 h-4 w-4 sm:h-5 sm:w-5 -translate-y-1/2 text-slate-400"
+              />
+              <input
+                id="channel-input"
+                type="text"
+                name="channel"
+                placeholder="Enter channel name or @handle"
+                class="pl-10 sm:pl-12 h-10 sm:h-12 border-0 bg-transparent focus:outline-none focus:ring-0 placeholder:text-slate-400 font-medium text-sm sm:text-base w-full"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 h-10 sm:h-12 px-4 sm:px-6 rounded-xl font-semibold text-sm sm:text-base w-full sm:w-auto inline-flex items-center justify-center"
+            >
+              Analyze
+              <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 px-2"
+        >
+          <span class="text-xs text-slate-500">Try:</span>
+          {
+            [
+              "@MrBeast",
+              "@PewDiePie",
+              "@T-Series",
+              "@5MinuteCrafts",
+              "@MrBeastGaming",
+            ].map((channel) => (
+              <button
+                class="px-2 sm:px-3 py-1 text-xs bg-slate-200 hover:bg-slate-300 rounded-full text-slate-700 transition-colors duration-200 font-medium"
+                data-channel={channel}
+              >
+                {channel}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs text-slate-500 px-4">
+          Trusted by{" "}
+          <span class="font-semibold text-slate-700">10,000+</span>{" "}
+          content creators worldwide
+        </p>
+      </div>
     </div>
-    <p class="mt-6 text-sm text-gray-500">
-      ⚡ Powered by the official YouTube API — Updated regularly & accurate.
-    </p>
   </div>
 </section>
+
 <script>
+  // @ts-nocheck
   document.addEventListener("DOMContentLoaded", () => {
-    const tags = document.querySelectorAll("[data-channel]");
+    const buttons = document.querySelectorAll("button[data-channel]");
     const input = document.getElementById("channel-input");
     if (!input) return;
-    tags.forEach((tag) => {
-      tag.addEventListener("click", () => {
-        const value = tag.getAttribute("data-channel");
-        input.value = value;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        input.value = btn.getAttribute("data-channel");
         input.focus();
       });
     });

@@ -44,7 +44,7 @@ export default function HeaderReact() {
               : "opacity-0 translate-x-8 scale-95 pointer-events-none"
           }`}
         >
-          <form method="GET" className="relative">
+          <form method="GET" action="/" className="relative">
             <input
               type="text"
               placeholder="Search any YouTube channel..."
@@ -102,7 +102,7 @@ export default function HeaderReact() {
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-200 bg-white">
           <nav className="container py-6 space-y-4">
-            <form method="GET" className="relative mb-4">
+            <form method="GET" action="/" className="relative mb-4">
               <input
                 type="text"
                 placeholder="Search any YouTube channel..."
