@@ -91,17 +91,17 @@ const schemaJSONLD = {
 
     <link rel="sitemap" href="/sitemap.xml" />
 
-    <!-- Google font -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6521178728176260"
-     crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6521178728176260"
+      crossorigin="anonymous"></script>
   </head>
   <body class="font-geist">
     <!-- Full-page Loader -->
@@ -123,23 +123,23 @@ const schemaJSONLD = {
 
     <slot />
 
-<script>
-function attachLoaderEvents() {
-  const loader = document.getElementById("global-loader");
-  const forms = document.querySelectorAll("form");
+    <script>
+      function attachLoaderEvents() {
+        const loader = document.getElementById("global-loader");
+        const forms = document.querySelectorAll("form");
 
-  forms.forEach((form) => {
-    form.addEventListener("submit", () => {
-      loader.classList.remove("hidden");
-    });
-  });
-}
+        forms.forEach((form) => {
+          form.addEventListener("submit", () => {
+            loader.classList.remove("hidden");
+          });
+        });
+      }
 
-window.addEventListener("DOMContentLoaded", attachLoaderEvents);
-window.addEventListener("pageshow", () => {
-  document.getElementById("global-loader")?.classList.add("hidden");
-  attachLoaderEvents();
-});
-</script>
+      window.addEventListener("DOMContentLoaded", attachLoaderEvents);
+      window.addEventListener("pageshow", () => {
+        document.getElementById("global-loader")?.classList.add("hidden");
+        attachLoaderEvents();
+      });
+    </script>
   </body>
 </html>

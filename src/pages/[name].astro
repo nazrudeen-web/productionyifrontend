@@ -4,11 +4,8 @@ const { params } = Astro;
 import BaseLayout from "../layout/BaseLayout.astro";
 import NotFound from "../components/NotFound.astro"; // make sure this exists
 import ChannelDetails from "../components/ChannelDetails.astro";
-import HeaderWithForm from "../components/HeaderWithForm.astro";
 import HeaderReact from "../components/Header.jsx";
-import FooterReact from '../components/FooterReact.jsx';
-
-import Footer from "../components/Footer.astro";
+import FooterReact from "../components/FooterReact.jsx";
 
 const cleanName = (params.name ?? "").replace(/-net-worth$/, "");
 const apiUrl = `https://api.youtubersincome.com/?channel=@${cleanName}`;
@@ -53,19 +50,12 @@ const pageImage = data?.thumbnail ?? null;
   pageUrl={pageUrl}
   pageImage={pageImage}
 >
-  <HeaderReact client:only="react" /> 
+  <HeaderReact client:only="react" />
 
-  <main class="max-w-5xl mx-auto min-h-screen ">
+  <main class="max-w-5xl mx-auto min-h-screen">
     <div class="px-4 py-6 md:py-8">
-  {isError ? (
-    <NotFound />
-  ) : (
-    <ChannelDetails data={data} />
-  )}
-
-</div>
-
-
-</main>
-<FooterReact/>
+      {isError ? <NotFound /> : <ChannelDetails data={data} />}
+    </div>
+  </main>
+  <FooterReact />
 </BaseLayout>
