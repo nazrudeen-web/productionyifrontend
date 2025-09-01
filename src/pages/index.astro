@@ -4,9 +4,8 @@ import BaseLayout from "../layout/BaseLayout.astro";
 import Header from "../components/Header.jsx";
 import Hero from "@/components/Hero.astro";
 import RecentChannels from "@/components/RecentChannels.astro";
-
-import TopChannelsReact from "../components/TopChannelsReact.jsx";
-import BlogPreviewReact from "../components/BlogPreviewReact.jsx";
+import HighestEarningChannels from "@/components/HighestEarningChannels.astro";
+import BlogPreview from "@/components/BlogPreview.astro";
 import HowItWorksReact from "../components/HowItWorksReact.jsx";
 import FaqReact from "../components/FaqReact.jsx";
 import AboutReact from "../components/AboutReact.jsx";
@@ -60,10 +59,8 @@ if (input) {
     <Header client:load />
     <Hero />
     <RecentChannels />
-    <!-- <TopChannels /> -->
-    <TopChannelsReact client:load />
-    <!-- <BlogPreview /> -->
-    <BlogPreviewReact />
+    <HighestEarningChannels />
+    <BlogPreview />
     <!-- <HowItWorks /> -->
     <HowItWorksReact />
     <!-- <Faq /> -->

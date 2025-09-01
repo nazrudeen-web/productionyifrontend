@@ -6,7 +6,7 @@ pubDate: "2025-07-16"
 author: "Nasurudeen"
 category: "YouTube Growth"
 readTime: "10 min read"
-image: "/blogs/creator-economy-trends-graph.png"
+image: "/blogs/creator-economy-trends-graph.webp"
 ---
 
 If you're planning to start a YouTube channel in 2025, you’re probably asking one of the most important questions:

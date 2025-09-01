@@ -31,7 +31,7 @@ export default function HeaderReact() {
               YouTubers Income
             </span>
             <span className="text-[10px] sm:text-xs text-slate-500 font-medium">
-              Analytics & Insights
+              Earnings & Analytics
             </span>
           </div>
         </a>

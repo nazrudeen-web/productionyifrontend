@@ -8,30 +8,30 @@ const res = await fetch(KEYS_API);
 const channels = await res.json();
 ---
 
- <section class="py-12 sm:py-16 md:py-20 bg-white">
-      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-8 sm:mb-10 md:mb-12">
-          <div class="inline-flex items-center gap-2 mb-3 sm:mb-4">
-            <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-            <span class="text-xs sm:text-sm font-medium text-green-600">
-              RECENTLY ANALYZED
-            </span>
-          </div>
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 px-4">
-            Latest Channel Analytics
-          </h2>
-          <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto px-4">
-            Explore detailed analytics and income estimates for the most
-            successful YouTube creators across different niches
-          </p>
-        </div>
+<section class="py-12 sm:py-16 md:py-20 bg-white">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-8 sm:mb-10 md:mb-12">
+      <div class="inline-flex items-center gap-2 mb-3 sm:mb-4">
+        <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+        <span class="text-xs sm:text-sm font-medium text-green-600">
+          RECENTLY ANALYZED
+        </span>
+      </div>
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 px-4">
+        Latest YouTube Channel Analytics
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto px-4">
+        Explore detailed YouTube channel analytics and earnings estimates for
+        top creators across different niches.
+      </p>
+    </div>
 
-        {channels.length === 0 ? (
-    <p class="text-center py-16 text-gray-500">
-      No trending channels found.
-    </p>
-  ) : (
-
+    {
+      channels.length === 0 ? (
+        <p class="text-center py-16 text-gray-500">
+          No trending channels found.
+        </p>
+      ) : (
         <div class="max-w-5xl mx-auto shadow-xl border-1 bg-white rounded-xl border border-slate-200">
           <div class="p-0">
             <div class="divide-y divide-slate-100">
@@ -109,16 +109,18 @@ const channels = await res.json();
               ))}
             </div>
           </div>
-        </div>)}
-
-        <div class="text-center mt-6 sm:mt-8">
-          <a
-            href="/top-youtube-channels"
-            class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors duration-200 text-sm sm:text-base"
-          >
-            View All Recent Channels
-            <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
-          </a>
         </div>
-      </div>
-    </section>
+      )
+    }
+
+    <div class="text-center mt-6 sm:mt-8">
+      <a
+        href="/top-youtube-channels"
+        class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors duration-200 text-sm sm:text-base"
+      >
+        View All Recent Channels
+        <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
+      </a>
+    </div>
+  </div>
+</section>

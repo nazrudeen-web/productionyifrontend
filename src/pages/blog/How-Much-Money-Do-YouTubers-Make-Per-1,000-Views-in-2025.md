@@ -6,7 +6,7 @@ pubDate: 2025-07-06T14:45:00+04:00
 author: "Nasurudeen"
 category: "Earnings Analysis"
 readTime: "10 min read"
-image: "/blogs/youtube-earnings-chart.png"
+image: "/blogs/youtube-earnings-chart.webp"
 ---
 
 These days, YouTube isn’t just a fun place to watch videos — it’s also a serious way to

@@ -10,7 +10,7 @@ const blogPosts = [
     author: "Nazrudeen",
     date: "2025-08-15",
     readTime: "8 min read",
-    image: "/youtube-cpm-rates.png",
+    image: "/youtube-cpm-rates.webp",
   },
   {
     slug: "best-youtube-niches-2025",
@@ -20,7 +20,7 @@ const blogPosts = [
     author: "Nazrudeen",
     date: "2025-08-15",
     readTime: "6 min read",
-    image: "/creator-economy-trends-graph.png",
+    image: "/creator-economy-trends-graph.webp",
   },
   {
     slug: "How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
@@ -31,7 +31,7 @@ const blogPosts = [
     author: "Nazrudeen",
     date: "2025-08-15",
     readTime: "10 min read",
-    image: "/youtube-earnings-chart.png",
+    image: "/youtube-earnings-chart.webp",
   },
   {
     slug: "How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
@@ -42,7 +42,7 @@ const blogPosts = [
      author: "Nazrudeen",
     date: "2025-08-15",
     readTime: "7 min read",
-    image: "/youtube-shorts-revenue.png",
+    image: "/youtube-shorts-revenue.webp",
   },
 ]
 

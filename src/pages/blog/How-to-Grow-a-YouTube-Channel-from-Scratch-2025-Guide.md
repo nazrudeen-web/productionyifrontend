@@ -6,7 +6,7 @@ pubDate: 2025-07-07T12:45:00+04:00
 author: "Nasurudeen"
 category: "Guide"
 readTime: "7 min read"
-image: "/blogs/youtube-shorts-revenue.png"
+image: "/blogs/youtube-shorts-revenue.webp"
 ---
 
 Starting a YouTube channel can feel scary. You might worry about the gear, the

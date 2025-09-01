@@ -6,7 +6,7 @@ pubDate: "2025-07-16"
 author: "Nasurudeen"
 category: "Guide"
 readTime: "8 min read"
-image: "/blogs/youtube-cpm-rates.png"
+image: "/blogs/youtube-cpm-rates.webp"
 ---
 If you’ve been researching how much YouTubers earn, you’ve probably come across terms like **CPM** and **RPM**.
 
