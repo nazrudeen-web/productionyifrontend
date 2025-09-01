@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro";
-import HeaderWithForm from "../components/HeaderWithForm.astro";
-import Footer from "../components/Footer.astro";
+import Header from "../components/Header.jsx";
+import FooterReact from "../components/FooterReact.jsx";
 ---
 
 <BaseLayout
@@ -9,7 +9,7 @@ import Footer from "../components/Footer.astro";
   pageDescription="Learn what YoutubersIncome.com is, why it was created, and how it helps you estimate YouTube channel earnings based on views and CPM."
   pageUrl="https://youtubersincome.com/about"
 >
-  <HeaderWithForm />
+  <Header />
   <section class="max-w-4xl mx-auto py-16 px-6 text-gray-800">
     <h1 class="text-3xl font-bold mb-6">About YoutubersIncome.com</h1>
     <p class="mb-4 text-lg">
@@ -41,5 +41,5 @@ import Footer from "../components/Footer.astro";
       Google — just made to help creators like you.
     </p>
   </section>
-  <Footer />
+  <FooterReact />
 </BaseLayout>
