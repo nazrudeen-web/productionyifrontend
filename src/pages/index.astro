@@ -6,10 +6,10 @@ import Hero from "@/components/Hero.astro";
 import RecentChannels from "@/components/RecentChannels.astro";
 import HighestEarningChannels from "@/components/HighestEarningChannels.astro";
 import BlogPreview from "@/components/BlogPreview.astro";
-import HowItWorksReact from "../components/HowItWorksReact.jsx";
-import FaqReact from "../components/FaqReact.jsx";
-import AboutReact from "../components/AboutReact.jsx";
-import FooterReact from "../components/FooterReact.jsx";
+import HowItWorks from "@/components/HowItWorks.astro";
+import Faq from "../components/Faq.jsx";
+import About from "@/components/About.astro";
+import Footer from "@/components/Footer.astro";
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -55,19 +55,15 @@ if (input) {
   pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income. Fast, free, and accurate."
   pageUrl="https://youtubersincome.com"
 >
+  <Header client:load />
   <main class="min-h-screen bg-background">
-    <Header client:load />
     <Hero />
     <RecentChannels />
     <HighestEarningChannels />
     <BlogPreview />
-    <!-- <HowItWorks /> -->
-    <HowItWorksReact />
-    <!-- <Faq /> -->
-    <FaqReact client:only="react" />
-    <!-- <About /> -->
-    <AboutReact />
-    <!-- <Footer /> -->
-    <FooterReact />
+    <HowItWorks />
+    <Faq client:load />
+    <About />
   </main>
+  <Footer />
 </BaseLayout>

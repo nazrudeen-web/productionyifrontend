@@ -1,72 +1,64 @@
-<section class="max-w-4xl mx-auto py-16 px-4 border-b border-divider">
-  <div class="text-center mb-14">
-    <h2 class="text-xl md:text-2xl uppercase font-bold text-gray-900 mb-4">
-      How It Works
-    </h2>
-    <p class="text-sm text-gray-600 leading-relaxed md:text-base">
-      Wondering how much a YouTube channel earns from ads? Our tool gives you
-      fast, accurate estimates using live YouTube data. Here’s how it works in 3
-      simple steps:
-    </p>
+---
+import { Search, BarChart3, DollarSign, Zap } from "lucide-react";
+
+const steps = [
+  {
+    icon: Search,
+    title: "Enter Channel Info",
+    description: "Simply type in any YouTube channel name, handle, or URL",
+  },
+  {
+    icon: BarChart3,
+    title: "We Analyze Data",
+    description:
+      "Our algorithm processes views, subscribers, and engagement metrics",
+  },
+  {
+    icon: DollarSign,
+    title: "Get Income Estimate",
+    description: "Receive detailed monthly and yearly revenue projections",
+  },
+  {
+    icon: Zap,
+    title: "Instant Results",
+    description: "All calculations happen in real-time with up-to-date data",
+  },
+];
+---
+
+<section id="how-it-works" class="py-12 md:py-20 bg-slate-50/50">
+  <div class="container max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-xl md:text-3xl font-bold mb-3 md:mb-4">
+        How Our YouTube Earnings Calculator Works
+      </h2>
+      <p class="text-sm md:text-base text-slate-600 max-w-2xl mx-auto px-4">
+        Our YouTube income calculator analyzes views, subscribers, and
+        engagement to provide accurate monthly and yearly earnings estimates.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {
+        steps.map((step, index) => (
+          <div class="text-center relative bg-white rounded-xl border border-slate-200 shadow-sm">
+            <div class="p-4 md:p-6">
+              <div class="mb-3 md:mb-4 inline-flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-lg bg-red-100">
+                <step.icon className="h-5 w-5 md:h-6 md:w-6 text-red-600" />
+              </div>
+              <h3 class="font-semibold mb-2 text-base md:text-lg">
+                {step.title}
+              </h3>
+              <p class="text-sm md:text-base text-slate-600">
+                {step.description}
+              </p>
+            </div>
+            {index < steps.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-slate-200" />
+            )}
+          </div>
+        ))
+      }
+    </div>
   </div>
-
-  <ol class="relative space-y-14 pl-10">
-    <!-- Step 1 -->
-    <li class="relative">
-      <div
-        class="absolute -left-[34px] top-0 w-10 h-10 bg-accent text-white flex items-center justify-center rounded-full text-sm font-bold shadow"
-      >
-        1
-      </div>
-      <div class="ml-4">
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">
-          Paste Channel URL
-        </h3>
-        <p class="text-sm text-gray-700 leading-relaxed">
-          Enter a YouTube handle (like <code>@mrbeast</code>), a channel ID, or
-          the full channel URL. Our system detects it automatically and starts
-          analyzing. Whether you're a creator, fan, or marketer — it's open to
-          everyone.
-        </p>
-      </div>
-    </li>
-
-    <!-- Step 2 -->
-    <li class="relative">
-      <div
-        class="absolute -left-[34px] top-0 w-10 h-10 bg-accent text-white flex items-center justify-center rounded-full text-sm font-bold shadow"
-      >
-        2
-      </div>
-      <div class="ml-4">
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">
-          Real-Time Analysis
-        </h3>
-        <p class="text-sm text-gray-700 leading-relaxed">
-          We pull live data from the YouTube API — like subscriber count, total
-          views, and recent activity. Then we apply smart CPM estimates based on
-          region and niche to calculate realistic ad revenue.
-        </p>
-      </div>
-    </li>
-
-    <!-- Step 3 -->
-    <li class="relative">
-      <div
-        class="absolute -left-[34px] top-0 w-10 h-10 bg-accent text-white flex items-center justify-center rounded-full text-sm font-bold shadow"
-      >
-        3
-      </div>
-      <div class="ml-4">
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">
-          Get Income Estimate
-        </h3>
-        <p class="text-sm text-gray-700 leading-relaxed">
-          Instantly see how much the channel could be earning — monthly and
-          yearly. No login, no waiting. Just simple, accurate insights to help
-          creators and businesses understand YouTube earnings better.
-        </p>
-      </div>
-    </li>
-  </ol>
 </section>
