@@ -2,14 +2,14 @@
 import "../styles/global.css";
 import BaseLayout from "../layout/BaseLayout.astro";
 import Header from "../components/Header.jsx";
-import Hero from "@/components/Hero.astro";
-import RecentChannels from "@/components/RecentChannels.astro";
-import HighestEarningChannels from "@/components/HighestEarningChannels.astro";
-import BlogPreview from "@/components/BlogPreview.astro";
-import HowItWorks from "@/components/HowItWorks.astro";
-import Faq from "../components/Faq.jsx";
-import About from "@/components/About.astro";
 import Footer from "@/components/Footer.astro";
+import Hero from "@/components/index-page/Hero.astro";
+import RecentChannels from "@/components/index-page/RecentChannels.astro";
+import HighestEarningChannels from "@/components/index-page/HighestEarningChannels.astro";
+import BlogPreview from "@/components/index-page/BlogPreview.astro";
+import HowItWorks from "@/components/index-page/HowItWorks.astro";
+import Faq from "../components/index-page/Faq.jsx";
+import About from "@/components/index-page/About.astro";
 
 // Get "channel" input from URL (example: ?channel=MrBeast or ?channel=@mrbeast)
 const url = new URL(Astro.request.url);
@@ -54,6 +54,7 @@ if (input) {
   pageTitle="YouTube Income Estimator – Check How Much Money Any Channel Makes"
   pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income. Fast, free, and accurate."
   pageUrl="https://youtubersincome.com"
+  showLoader={true}
 >
   <Header client:load />
   <main class="min-h-screen bg-background">

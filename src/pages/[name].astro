@@ -1,47 +1,103 @@
 ---
+// Get dynamic route params from Astro (example: /mrbeast-net-worth → name = "mrbeast-net-worth")
 const { params } = Astro;
 
 import BaseLayout from "../layout/BaseLayout.astro";
-import NotFound from "../components/NotFound.astro"; // make sure this exists
-import ChannelDetails from "../components/ChannelDetails.astro";
-import HeaderReact from "../components/Header.jsx";
-import FooterReact from "../components/FooterReact.jsx";
+import NotFound from "../components/NotFound.astro";
+import ChannelDetails from "../components/channel-page/ChannelDetails.astro";
+import Header from "../components/Header.jsx";
+import Footer from "@/components/Footer.astro";
 
+// Clean URL name → remove "-net-worth" at end if exists
 const cleanName = (params.name ?? "").replace(/-net-worth$/, "");
+
+// API URL for fetching channel data (example: @mrbeast)
 const apiUrl = `https://api.youtubersincome.com/?channel=@${cleanName}`;
 
+// Store channel data here
 let data = null;
+// Track if error happens
 let isError = false;
 
 try {
   const response = await fetch(apiUrl);
+  // Call API
   data = await response.json();
+  // Convert response to JSON
+
   if (!data || !data.title || !data.subscriberCount || !data.viewCount) {
+    // Check if important data missing
     isError = true;
+    // If missing → mark error
   }
 } catch (err) {
+  // If API fails
   console.error("API error:", err);
+  // Log error in console
   isError = true;
+  // Mark as error
 }
 
 // ✅ Set status manually for SEO and crawlers
 if (isError) {
   Astro.response.status = 404;
+  // If error → set page status 404
 }
 
 const year = new Date().getFullYear();
-const siteName = "youtubersincome.com";
+// Get current year (example: 2025)
+
 const formattedIncome = (num) => {
-  if (num >= 1e9) return `$${(num / 1e9).toFixed(1)} billion`;
-  if (num >= 1e6) return `$${(num / 1e6).toFixed(1)} million`;
+  if (num >= 1e9) {
+    const n = num / 1e9;
+    return `$${n % 1 === 0 ? Math.round(n) : Number(n.toFixed(1))} billion`;
+  }
+  if (num >= 1e6) {
+    const n = num / 1e6;
+    return `$${n % 1 === 0 ? Math.round(n) : Number(n.toFixed(1))} million`;
+  }
   return `$${num}`;
 };
 
+// ✅ Format yearly income with fallback
+// Yearly income safe format
+let safeYearlyIncome;
+
+if (data?.yearlyIncome && data.yearlyIncome >= 1e6) {
+  // Million+ → show exact formatted
+  safeYearlyIncome = formattedIncome(data.yearlyIncome);
+} else if (data?.yearlyIncome && data.yearlyIncome >= 50000) {
+  // Between 50K and 1M → show "$50K+"
+  safeYearlyIncome = `$${Math.round(data.yearlyIncome / 1000)}K+`;
+} else {
+  // Small or unknown → generic text
+  safeYearlyIncome = "their income";
+}
+
+// ✅ Format monthly income smart
+let safeMonthlyIncome;
+if (data?.monthlyIncome && data.monthlyIncome >= 10000) {
+  safeMonthlyIncome = formattedIncome(data.monthlyIncome); // e.g. $12 million
+} else if (data?.monthlyIncome && data.monthlyIncome >= 500) {
+  safeMonthlyIncome = `about $${Math.round(data.monthlyIncome / 100) * 100}/month`; // e.g. about $5,000/month
+} else {
+  safeMonthlyIncome = "an estimated monthly income"; // ✅ better fallback
+}
+
+// Channel title or "Unknown" if not found
 const channelTitle = data?.title ?? "Unknown Channel";
-const pageTitle = `${channelTitle} Net Worth ${year}: How ${formattedIncome(data.yearlyIncome)} Was Built`;
-const pageDescription = `${channelTitle} earns ${formattedIncome(data.monthlyIncome)}/month from YouTube, sponsorships, and business ventures. See full net worth breakdown, income sources, and growth over time.`;
+
+// ✅ SEO Title
+const pageTitle = `${channelTitle} Net Worth ${year}: How They Earned ${safeYearlyIncome}`;
+
+// ✅ SEO Description
+const pageDescription = `${channelTitle} earns around ${safeMonthlyIncome}/month from YouTube, sponsorships, and business ventures. See full net worth breakdown, income sources, and growth over time.`;
+
 const pageUrl = `https://youtubersincome.com/${params.name}`;
+// Canonical page URL
+
 const pageImage = data?.thumbnail ?? null;
+// Channel thumbnail image or null if missing
 ---
 
 <BaseLayout
@@ -50,12 +106,12 @@ const pageImage = data?.thumbnail ?? null;
   pageUrl={pageUrl}
   pageImage={pageImage}
 >
-  <HeaderReact client:only="react" />
+  <Header client:load />
 
   <main class="max-w-5xl mx-auto min-h-screen">
     <div class="px-4 py-6 md:py-8">
       {isError ? <NotFound /> : <ChannelDetails data={data} />}
     </div>
   </main>
-  <FooterReact />
+  <Footer />
 </BaseLayout>

@@ -1,7 +1,11 @@
 ---
 import { Crown, ExternalLink } from "lucide-react";
-import { fetchTopChannels } from "../data/topChannelsFetch";
-import { getReadableTopics, formatNumber, formatUSD } from "../utils/helper.js";
+import { fetchTopChannels } from "../../data/topChannelsFetch";
+import {
+  getReadableTopics,
+  formatNumber,
+  formatUSD,
+} from "../../utils/helper.js";
 const topChannels = (await fetchTopChannels()).slice(0, 5); // Only show top 5
 ---
 

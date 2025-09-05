@@ -1,0 +1,95 @@
+---
+const { data } = Astro.props;
+import ChannelHeader from "./ChannelHeader.astro";
+import ChannelStats from "./ChannelStats.astro";
+import ChannelEarnings from "./ChannelEarnings.astro";
+import ChannelAbout from "./ChannelAbout.astro";
+import ChannelEarningsHistory from "./ChannelEarningsHistory.astro";
+import ChannelHeaderReact from "./ChannelHeaderReact.jsx";
+import ChannelAboutReact from "./ChannelAboutReact.jsx";
+import ChannelEarningsReact from "./ChannelEarningsReact.jsx";
+import ChannelEarningsHistoryReact from "./ChEarningHistoryReact.jsx";
+import LatestVideo from "./LatestVideo.jsx";
+import ChannelFaq from "./ChannelFaq.jsx";
+import RealtedChannel from "./RelatedChannel.jsx";
+
+// const faqSchema = {
+//   "@context": "https://schema.org",
+//   "@type": "FAQPage",
+//   mainEntity: faqs.map(({ question, answer }) => ({
+//     "@type": "Question",
+//     name: question,
+//     acceptedAnswer: {
+//       "@type": "Answer",
+//       text: answer,
+//     },
+//   })),
+// };
+---
+
+<!-- Hidden only for SEO -->
+<section class="sr-only">
+  <h1>
+    {data.title} YouTube Channel Stats, Earnings & Latest Videos
+  </h1>
+  <p>
+    Discover how much {data.title} earns, view daily stats, and explore their newest
+    videos — all in one place.
+  </p>
+</section>
+
+<div class="mt-6 md:mt-8 grid gap-6 md:gap-8">
+  <ChannelHeader data={data} />
+
+  <ChannelAboutReact data={data} />
+
+  <ChannelEarningsReact data={data} />
+
+  <ChannelEarningsHistoryReact data={data} />
+
+  <LatestVideo data={data} />
+
+  <ChannelFaq data={data} client:only="react" />
+
+  <RealtedChannel data={data} client:only="react" />
+
+  <!-- <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /> -->
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const buttons = document.querySelectorAll("#faq-accordion button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = document.getElementById(
+            button.getAttribute("aria-controls")
+          );
+          const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+          // Close all
+          buttons.forEach((btn) => {
+            btn.setAttribute("aria-expanded", "false");
+            const c = document.getElementById(
+              btn.getAttribute("aria-controls")
+            );
+            c.style.maxHeight = "0";
+            btn.querySelector("svg")?.classList.remove("rotate-180");
+          });
+
+          // Open clicked one if not already open
+          if (!isExpanded) {
+            button.setAttribute("aria-expanded", "true");
+            content.style.maxHeight = content.scrollHeight + "px";
+            button.querySelector("svg")?.classList.add("rotate-180");
+          }
+        });
+      });
+
+      // Set max-height for the first one manually on load
+      const firstContent = document.getElementById("faq-content-0");
+      if (firstContent) {
+        firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+      }
+    });
+  </script>
+</div>

@@ -1,0 +1,117 @@
+---
+const { data } = Astro.props;
+import { ExternalLink, Calendar, MapPin } from "lucide-react";
+import ChannelShare from "./ChannelShare.astro";
+
+const publishedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const topics =
+  data.topicCategories?.map((url) => {
+    const name = url.split("/").pop()?.replace(/_/g, " ") || "";
+    return decodeURIComponent(name);
+  }) || [];
+
+const readableTopics =
+  topics.length > 1
+    ? topics.slice(0, -1).join(", ") + " & " + topics.slice(-1)
+    : topics[0] || "Creator";
+
+const countryName = new Intl.DisplayNames(["en"], { type: "region" }).of(
+  data.country
+);
+
+const getFlagEmoji = (code) => {
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
+};
+const flag = getFlagEmoji(data.country);
+
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()
+  );
+}
+---
+
+<div class="rounded-2xl bg-white shadow-lg">
+  {/* Banner Section */}
+  <div
+    class="relative h-40 w-full bg-gradient-to-br from-slate-600 to-slate-800 md:h-56"
+  >
+    {
+      data.bannerImage && (
+        <img
+          src={data.bannerImage}
+          alt={`${data.title} banner`}
+          class="h-full w-full object-cover"
+        />
+      )
+    }
+
+    {/* Profile Image */}
+    <div class="absolute -bottom-16 left-4 z-10 md:left-8">
+      <div class="relative">
+        <img
+          src={data.thumbnail}
+          alt={`${data.title} profile`}
+          class="h-24 w-24 md:h-32 md:w-32 rounded-full border-4 border-white bg-white object-cover shadow-xl"
+        />
+        <div class="absolute -bottom-2 -right-2 rounded-full bg-red-600 p-2">
+          <div class="h-3 w-3 rounded-full bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Channel Info */}
+  <div class="px-4 pb-8 pt-20 md:px-8">
+    <div
+      class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
+    >
+      <div class="flex-1">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
+          {toTitleCase(data.title)}
+        </h2>
+        <p class="mt-2 text-base md:text-lg text-slate-600">
+          YouTube Creator · {readableTopics}
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
+          <div class="flex items-center gap-1">
+            <Calendar className="h-4 w-4" />
+            <span>Joined {publishedDate}</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <MapPin className="h-4 w-4" />
+            <span>
+              {flag}
+              {countryName}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div class="flex flex-wrap gap-3 items-center">
+        <a
+          href={`https://www.youtube.com/${data.handle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-md font-medium transition-colors duration-200"
+        >
+          <ExternalLink className="mr-2 h-4 w-4" />
+          Visit Channel
+        </a>
+        <ChannelShare
+          shareText={`Check out ${data.title}'s YouTube earnings and analytics!`}
+        />
+      </div>
+    </div>
+  </div>
+</div>
