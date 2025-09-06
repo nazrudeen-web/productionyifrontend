@@ -1,0 +1,33 @@
+---
+const { data } = Astro.props;
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Play } from "lucide-react";
+
+const uploadsPlaylistId = "UU" + data.id.slice(2);
+---
+
+<Card>
+  <CardHeader>
+    <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+      <Play className="h-5 w-5" />
+      Latest Videos from {data.title}
+    </CardTitle>
+    <p class="text-sm md:text-base text-slate-600">
+      Watch the newest videos uploaded by <strong>{data.title}</strong>. Stay
+      up-to-date with their latest content and trending topics.
+    </p>
+  </CardHeader>
+  <CardContent>
+    <div
+      class="relative w-full overflow-hidden rounded-lg"
+      style={{ paddingTop: "56.25%" }}
+    >
+      <iframe
+        src={`https://www.youtube.com/embed/videoseries?list=${uploadsPlaylistId}`}
+        title={`Latest videos playlist of ${data.title}`}
+        class="absolute top-0 left-0 h-full w-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </CardContent>
+</Card>

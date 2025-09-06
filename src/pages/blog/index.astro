@@ -1,42 +1,9 @@
 ---
 import BaseLayout from "../../layout/BaseLayout.astro";
 import Header from "../../components/Header.jsx";
-import FooterReact from "../../components/FooterReact.jsx";
+import Footer from "@/components/Footer.astro";
 import BlogHeader from "../../components/blog/Blog-Header.jsx";
 import BlogCard from "../../components/blog/BlogCard.jsx";
-
-const posts = [
-  {
-    title:
-      "YouTube CPM vs RPM in 2025 – What’s the Difference and Why It Matters",
-    description:
-      "Confused by YouTube metrics like CPM and RPM? This 2025 guide explains what they mean, how they affect your earnings, and how to increase both.",
-    href: "/blog/youtube-cpm-vs-rpm-2025",
-    pubDate: "July 16, 2025",
-  },
-  {
-    title:
-      "Top 10 Most Profitable YouTube Niches in 2025 (Low Competition + High CPM)",
-    description:
-      "Looking to start a channel in 2025? Discover the most profitable YouTube niches with high CPM and low competition to grow faster.",
-    href: "/blog/best-youtube-niches-2025",
-    pubDate: "July 16, 2025",
-  },
-  {
-    title: "How Much Do YouTubers Make per 1K Views in 2025?",
-    description:
-      "Learn how much YouTube pays per 1,000 views (CPM) and how creators can increase earnings.",
-    href: "/blog/How-Much-Money-Do-YouTubers-Make-Per-1,000-Views-in-2025",
-    pubDate: "July 06, 2025",
-  },
-  {
-    title: "Grow a YouTube Channel from Zero – 2025 Beginner Guide",
-    description:
-      "Starting a YouTube channel in 2025? Learn how to pick a niche, make content, and grow fast — even with zero subscribers.",
-    href: "/blog/How-to-Grow-a-YouTube-Channel-from-Scratch-2025-Guide",
-    pubDate: "July 07, 2025",
-  },
-];
 
 const pageTitle = "YouTube Earnings Blog – Tips, CPM Insights & Growth Ideas";
 const pageDescription =
@@ -47,7 +14,7 @@ const isBlog = true;
 ---
 
 <BaseLayout {pageTitle} {pageDescription} {pageUrl} {pageImage} {isBlog}>
-      <Header client:load/>
+  <Header client:load />
   <div
     class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
   >
@@ -61,31 +28,5 @@ const isBlog = true;
     </main>
   </div>
 
-  <!-- <main class="max-w-4xl mx-auto px-4 md:px-6 py-10">
-    <h2 class="text-xl font-semibold ml-2 tracking-wide mb-6 text-gray-800">
-      Explore the Latest Posts
-    </h2>
-    <ul class="grid gap-12">
-      {
-        posts.map((post) => (
-          <li class="group border border-divider rounded-xl bg-white p-5 transition hover:border-red-400">
-            <a href={post.href} class="block space-y-2">
-              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-red-600 transition">
-                {post.title}
-              </h3>
-              <p class="text-xs text-gray-400">{post.pubDate}</p>
-              <p class="text-sm text-gray-600 leading-relaxed">
-                {post.description}
-              </p>
-              <span class="inline-block mt-2 text-sm text-red-600 font-medium group-hover:underline">
-                Read more →
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </main> -->
-
-  <FooterReact />
+  <Footer />
 </BaseLayout>

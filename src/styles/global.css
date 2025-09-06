@@ -147,7 +147,7 @@
   }
 
   p {
-    @apply leading-relaxed text-sm sm:text-base;
+    @apply leading-relaxed text-base sm:text-base;
   }
 
   /* Professional grid pattern utility */

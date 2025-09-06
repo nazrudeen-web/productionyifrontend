@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Calculator, Play, Search } from "lucide-react";
 
-export default function HeaderReact() {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showStickySearch, setShowStickySearch] = useState(false);
 

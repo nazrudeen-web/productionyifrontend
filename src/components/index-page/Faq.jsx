@@ -38,8 +38,27 @@ export default function FAQ() {
     );
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <section className="py-12 md:py-20" id="faq">
+      {/* JSON-LD for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4">

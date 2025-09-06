@@ -1,137 +1,150 @@
 ---
 const { data } = Astro.props;
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BarChart3, TrendingUp, TrendingDown } from "lucide-react";
+import { formatNumber, toTitleCase } from "@/utils/helper";
 
-function formatNumber(n) {
-  if (!n) return "-";
-  return new Intl.NumberFormat("en", {
-    notation: "compact",
-    compactDisplay: "short",
-    maximumFractionDigits: 1,
-  }).format(Number(n));
-}
+// Generate mock earnings data for the last 14 days
+const generateEarningsData = () => {
+  const today = new Date();
+  const earnings = [];
 
-function getRandomBetween(min, max) {
-  return Math.random() * (max - min) + min;
-}
+  for (let i = 13; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
 
-const today = new Date();
-const daysCount = 14;
+    // Simulate daily earnings with some variation
+    const baseEarnings = data.avgDailyViews * (data.finalCPM / 1000);
+    const variation = 0.8 + Math.random() * 0.4; // ±20% variation
+    const dailyEarnings = Math.round(baseEarnings * variation);
 
-// Generate daily earnings for current period (last 14 days)
-const currentStats = [];
-for (let i = daysCount - 1; i >= 0; i--) {
-  const date = new Date(today);
-  date.setDate(today.getDate() - i);
-  // fluctuate daily views ±20% around avgDailyViews
-  const dailyViews = data.avgDailyViews * getRandomBetween(0.8, 1.2);
-  const dailyEarnings = dailyViews * (data.finalCPM / 1000);
-  currentStats.push({
-    date: date.toISOString().slice(0, 10),
-    earnings: Math.round(dailyEarnings),
-  });
-}
+    earnings.push({
+      date: date.toISOString().slice(0, 10),
+      earnings: dailyEarnings,
+      formatted: date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
+    });
+  }
 
-// Generate previous period (previous 14 days) to calculate growth
-const previousStats = [];
-for (let i = daysCount * 2 - 1; i >= daysCount; i--) {
-  const date = new Date(today);
-  date.setDate(today.getDate() - i);
-  // fluctuate daily views ±20% around avgDailyViews but slightly lower (simulate growth)
-  const dailyViews = data.avgDailyViews * getRandomBetween(0.7, 1.1);
-  const dailyEarnings = dailyViews * (data.finalCPM / 1000);
-  previousStats.push({
-    date: date.toISOString().slice(0, 10),
-    earnings: Math.round(dailyEarnings),
-  });
-}
+  return earnings;
+};
 
-// Calculate growth between current and previous period
-function averageEarnings(stats) {
-  return stats.reduce((sum, s) => sum + s.earnings, 0) / stats.length;
-}
-const avgCurrent = averageEarnings(currentStats);
-const avgPrevious = averageEarnings(previousStats);
-const weeklyGrowth = ((avgCurrent - avgPrevious) / avgPrevious) * 100; // approx weekly growth %
-const monthlyGrowth = weeklyGrowth * 4; // rough monthly growth %
+const earningsData = generateEarningsData();
+const totalEarnings = earningsData.reduce((sum, day) => sum + day.earnings, 0);
+const avgDailyEarnings = totalEarnings / earningsData.length;
+const maxEarnings = Math.max(...earningsData.map((d) => d.earnings));
+const minEarnings = Math.min(...earningsData.map((d) => d.earnings));
 
-const lowestEarnings = Math.min(...currentStats.map((s) => s.earnings));
-const highestEarnings = Math.max(...currentStats.map((s) => s.earnings));
-
-// Forecast next month revenue as current 14-day total * 2 (approx 30 days)
-const forecastNextMonth =
-  currentStats.reduce((sum, s) => sum + s.earnings, 0) * 2;
-
-// Use yearlyIncome from API as net worth estimate (or you can tweak)
-const netWorthEstimate = data.yearlyIncome;
+// Calculate growth (mock comparison with previous period)
+const growthRate = 12.5; // Mock growth rate
+const isPositiveGrowth = growthRate > 0;
 ---
 
-<section class="mx-auto max-w-4xl p-6 bg-white rounded-xl shadow mt-8">
-  <h2 class="text-xl font-bold text-gray-900">
-    {data.title} Channel's Current Stats and Earnings
-  </h2>
-  <p class="mt-2 text-gray-700 text-sm md:text-base leading-relaxed">
-    Here is a detailed overview of <strong>{data.title}</strong>'s estimated
-    earnings over the past two weeks, based on average daily views and CPM
-    rates. This breakdown helps to understand the channel's recent performance
-    and revenue trends.
-  </p>
+<Card>
+  <CardHeader>
+    <CardTitle className="flex items-center gap-2 text-lg md:text-xl leading-tight">
+      <BarChart3 className="h-5 w-5" />
+      Earnings History for {toTitleCase(data.title)} (Last 14 Days)
+    </CardTitle>
+    <div class="flex flex-wrap items-center gap-2 pt-2">
+      <Badge
+        variant={isPositiveGrowth ? "default" : "destructive"}
+        className="flex items-center gap-1"
+      >
+        {
+          isPositiveGrowth ? (
+            <TrendingUp className="h-3 w-3" />
+          ) : (
+            <TrendingDown className="h-3 w-3" />
+          )
+        }
+        {Math.abs(growthRate)}% vs previous period
+      </Badge>
+    </div>
+    <p class="mt-2 text-sm md:text-base text-slate-700 leading-relaxed pt-2">
+      This chart shows the last 14 days of estimated YouTube income for{" "}
+      <strong>{toTitleCase(data.title)}</strong>. It includes daily earnings,
+      highest day, and average performance, based on CPM and views.
+    </p>
+  </CardHeader>
 
-  <ul
-    class="mt-4 list-disc list-inside text-gray-700 text-sm md:text-base space-y-2"
-  >
-    <li>
-      During this period, the <strong>lowest daily earnings</strong> were approximately
-      <strong>${formatNumber(lowestEarnings)}</strong>.
-    </li>
-    <li>
-      The <strong>highest daily earnings</strong> reached nearly <strong
-        >${formatNumber(highestEarnings)}</strong
-      >.
-    </li>
-    <li>
-      Compared to the previous two-week period, the channel shows an <strong
-        >average weekly growth</strong
-      > of <strong>{weeklyGrowth.toFixed(1)}%</strong> and a <strong
-        >monthly growth rate</strong
-      > of about <strong>{monthlyGrowth.toFixed(1)}%</strong>.
-    </li>
-  </ul>
+  <CardContent>
+    {/* Stats Grid */}
+    <div
+      class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-lg bg-slate-50 p-4"
+    >
+      <div class="text-center">
+        <p class="text-lg md:text-xl font-bold text-slate-900">
+          ${formatNumber(totalEarnings)}
+        </p>
+        <p class="text-sm text-slate-600">Total (14 days)</p>
+      </div>
+      <div class="text-center">
+        <p class="text-lg md:text-xl font-bold text-slate-900">
+          ${formatNumber(avgDailyEarnings)}
+        </p>
+        <p class="text-sm text-slate-600">Daily Average</p>
+      </div>
+      <div class="text-center">
+        <p class="text-lg md:text-xl font-bold text-slate-900">
+          ${formatNumber(maxEarnings)}
+        </p>
+        <p class="text-sm text-slate-600">Highest Day</p>
+      </div>
+    </div>
 
-  <h3 class="mt-6 font-semibold text-gray-800">
-    Estimated Daily Earnings (Last 14 Days)
-  </h3>
-  <table
-    class="w-full mt-2 text-left text-sm md:text-base border border-gray-300 rounded-md overflow-hidden"
-  >
-    <thead class="bg-gray-100 text-gray-800">
-      <tr>
-        <th class="p-2 border-r border-gray-300">Date</th>
-        <th class="p-2 border-gray-300">Estimated Earnings</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        currentStats.map((day) => (
-          <tr class="border-t border-gray-300">
-            <td class="p-2 border-r border-gray-300">
-              {new Date(day.date).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              })}
-            </td>
-            <td class="p-2">${formatNumber(day.earnings)}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
-
-  <p class="mt-6 text-gray-800 font-semibold">
-    Forecast for next month's revenue:
-  </p>
-  <p class="text-lg font-bold text-gray-900">
-    {data.title}'s estimated net worth for {
-      today.toLocaleDateString("en-US", { month: "long", year: "numeric" })
-    } is approximately <strong>${formatNumber(netWorthEstimate)}</strong>.
-  </p>
-</section>
+    {/* Daily Breakdown */}
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-800 text-base md:text-lg">
+        Daily Earnings Breakdown
+      </h3>
+      <div
+        class="max-h-64 overflow-y-auto overflow-x-auto rounded-md border border-slate-200"
+      >
+        <table class="w-full text-sm min-w-[320px]">
+          <thead class="sticky top-0 bg-white">
+            <tr class="border-b">
+              <th class="py-2 px-2 text-left font-medium text-slate-600">
+                Date
+              </th>
+              <th class="py-2 px-2 text-right font-medium text-slate-600">
+                Earnings
+              </th>
+              <th class="py-2 px-2 text-right font-medium text-slate-600">
+                Bar
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              earningsData.map((day, index) => {
+                const percentage = (day.earnings / maxEarnings) * 100;
+                return (
+                  <tr class="border-b border-slate-100">
+                    <td class="py-2 px-2 text-slate-700">{day.formatted}</td>
+                    <td class="py-2 px-2 text-right font-medium text-slate-900">
+                      ${formatNumber(day.earnings)}
+                    </td>
+                    <td class="py-2 px-2 text-right">
+                      <div class="flex justify-end">
+                        <div class="w-20 sm:w-28 bg-slate-200 rounded-full h-2">
+                          <div
+                            class="bg-green-500 h-2 rounded-full transition-all duration-300"
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </CardContent>
+</Card>
