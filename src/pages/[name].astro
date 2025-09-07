@@ -109,7 +109,7 @@ const pageImage = data?.thumbnail ?? null;
   <Header client:load />
 
   <main class="max-w-5xl mx-auto min-h-screen">
-    <div class="px-4 py-6 md:py-8">
+    <div class="py-6 md:py-8">
       {isError ? <NotFound /> : <ChannelDetails data={data} />}
     </div>
   </main>
