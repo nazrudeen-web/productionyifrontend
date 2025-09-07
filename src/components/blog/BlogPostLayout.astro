@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, User, Clock } from "lucide-react";
-import ChannelShare from "../channel-page/ChannelShare.astro";
+import BlogShare from "./BlogShare.astro";
 
 const { frontmatter } = Astro.props;
 const {
@@ -59,7 +59,7 @@ const {
     </div>
 
     <div class="flex items-center gap-3">
-      <ChannelShare shareText={`Check out`} />
+      <BlogShare shareText={`Check out`} />
     </div>
   </header>
 
