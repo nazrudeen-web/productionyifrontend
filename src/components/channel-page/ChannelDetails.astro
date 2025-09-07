@@ -20,7 +20,7 @@ import RelatedChannel from "./RelatedChannel.jsx";
   </p>
 </section>
 
-<div class="mt-6 md:mt-8 grid gap-6 md:gap-8">
+<div class="mt-6 md:mt-8 space-y-6 md:space-y-8 px-2">
   <ChannelHeader data={data} />
 
   <ChannelAbout data={data} />
@@ -28,11 +28,11 @@ import RelatedChannel from "./RelatedChannel.jsx";
   <ChannelEarnings data={data} />
 
   <ChannelEarningsHistory data={data} />
+  <div class="space-y-6 md:space-y-8">
+    <LatestVideo data={data} />
 
-  <LatestVideo data={data} />
+    <ChannelFaq data={data} client:load />
 
-  <ChannelFaq data={data} client:load />
-
-  <RelatedChannel data={data} client:load />
-
+    <RelatedChannel data={data} client:load />
+  </div>
 </div>

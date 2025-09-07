@@ -87,7 +87,7 @@ export default function ChannelFAQ({ data }) {
   };
 
   return (
-    <Card>
+    <Card className="mb-10">
       {/* JSON-LD for SEO */}
       <script
         type="application/ld+json"
