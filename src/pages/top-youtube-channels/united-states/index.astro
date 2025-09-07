@@ -51,17 +51,25 @@ function formatGrowth(dailyViews) {
 
 const results = await fetchUSChannels();
 const channels = results;
+const popularCountries = [
+  { slug: "", name: "Global", flag: "🌐" },
+  { slug: "united-states", name: "United States", flag: "🇺🇸" },
+  { slug: "canada", name: "Canada", flag: "🇨🇦" },
+  { slug: "united-kingdom", name: "United Kingdom", flag: "🇬🇧" },
+  { slug: "germany", name: "Germany", flag: "🇩🇪" },
+  { slug: "australia", name: "Australia", flag: "🇦🇺" },
+];
 ---
 
 <BaseLayout
-  pageTitle="Top 10 Highest-Earning YouTube Channels in 2025"
-  pageDescription="See the top 10 YouTube channels ranked by estimated monthly income, views, and subscribers. Updated for 2025 — check who’s making the most money!"
+  pageTitle="Top YouTube Channels in the United States (2025 Rankings)"
+  pageDescription="Explore the most popular YouTubers in the USA, ranked by subscribers, views, and estimated income. Updated for 2025 — see who dominates YouTube in America."
   pageUrl="https://youtubersincome.com/top-youtube-channels/united-states"
 >
   <Header client:load />
 
   <div class="bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100">
-    <TopChannelHeader />
+    <TopChannelHeader country={popularCountries[1]} />
     <CountryNav />
     <main class="container max-w-7xl mx-auto px-4 py-6 md:py-12">
       <div class="space-y-6 md:space-y-8">
@@ -71,7 +79,7 @@ const channels = results;
           >
             <div>
               <h2 class="text-lg md:text-2xl font-bold text-slate-900">
-                Top YouTube Channels United States
+                {`Top YouTube Channels ${popularCountries[1].name}`}
               </h2>
               <p class="text-slate-600 mt-1 text-sm md:text-base">
                 Ranked by subscribers and estimated earnings

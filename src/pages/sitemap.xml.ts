@@ -4,6 +4,7 @@ export async function GET() {
   const staticRoutes = [
     "/",
     "/about",
+    "/calculator",
     "/privacy-policy",
     "/blog",
     "/top-youtube-channels",

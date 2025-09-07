@@ -36,13 +36,31 @@ export default function CalculatorFAQ() {
     },
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
-    <div class="bg-white border-b border-slate-200 mt-12">
-      <div class="container mx-auto px-4 py-8 md:py-12">
-        <div class="text-center max-w-3xl mx-auto">
+    <div className="bg-white border-b border-slate-200 mt-12">
+      {/* JSON-LD for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="text-center max-w-3xl mx-auto">
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
                 <HelpCircle className="h-5 w-5 text-blue-600" />
                 Frequently Asked Questions
               </CardTitle>

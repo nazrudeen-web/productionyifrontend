@@ -53,7 +53,7 @@ export default function IncomeCalculatorForm({
                 onChange={(e) => setMonthlyGoal(Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
               />
-              <style jsx>{`
+              <style>{`
                 .slider::-webkit-slider-thumb {
                   appearance: none;
                   height: 20px;
