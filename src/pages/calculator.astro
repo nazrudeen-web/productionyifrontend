@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro";
-import HeaderReact from "../components/Header.jsx";
-import FooterReact from "../components/FooterReact.jsx";
+import Header from "../components/Header.jsx";
+import Footer from "@/components/Footer.astro";
 import CalculatorHeader from "@/components/calculator/CalculatorHeader.astro";
 import CalculatorWrapper from "../components/calculator/CalculatorWrapper.jsx";
 import CalculatorFAQ from "@/components/calculator/CalculatorFAQ.jsx";
@@ -12,14 +12,14 @@ import CalculatorFAQ from "@/components/calculator/CalculatorFAQ.jsx";
   pageDescription="Estimate how much money any YouTube channel makes from ads. Just enter a channel name or handle to see monthly and yearly income."
   pageUrl="https://youtubersincome.com"
 >
-  <HeaderReact client:load />
+  <Header client:load />
   <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
     <CalculatorHeader />
     <main class="container mx-auto px-4 py-6 md:py-8">
       <!-- This will hydrate a React wrapper that holds the form + results -->
       <CalculatorWrapper client:load />
-      <CalculatorFAQ/>
+      <CalculatorFAQ />
     </main>
   </div>
-  <FooterReact />
+  <Footer />
 </BaseLayout>
