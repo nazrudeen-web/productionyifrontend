@@ -99,7 +99,7 @@ export default function ChannelFAQ({ data }) {
           Frequently Asked Questions
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 text-sm sm:text-base leading-relaxed">
         {faqs.map((faq, index) => (
           <Collapsible
             key={index}

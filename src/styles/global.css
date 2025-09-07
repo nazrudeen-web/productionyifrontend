@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./fonts.css"; 
 /* @import "tw-animate-css"; */
 
 /* :root {
@@ -146,9 +147,9 @@
     @apply text-sm sm:text-base md:text-lg;
   }
 
-  p {
+  /* p {
     @apply leading-relaxed text-sm sm:text-base;
-  }
+  } */
 
   /* Professional grid pattern utility */
   .bg-grid-slate-100 {

@@ -54,7 +54,7 @@ export default function CalculatorFAQ() {
                     <AccordionTrigger className="text-left">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-slate-600">
+                    <AccordionContent className="text-slate-600 text-left">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

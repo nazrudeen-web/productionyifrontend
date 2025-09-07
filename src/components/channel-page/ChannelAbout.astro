@@ -22,7 +22,7 @@ const countryName = new Intl.DisplayNames(["en"], { type: "region" }).of(
       About {toTitleCase(data.title)}
     </CardTitle>
   </CardHeader>
-  <CardContent className="space-y-4">
+  <CardContent className="space-y-4 text-sm sm:text-base">
     <p class="text-slate-700 leading-relaxed">
       <strong>{toTitleCase(data.title)}</strong> is a YouTube channel focused on
       <strong> {getReadableTopicsAll(data.topicCategories)}</strong>. It was

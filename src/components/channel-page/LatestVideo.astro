@@ -19,15 +19,37 @@ const uploadsPlaylistId = "UU" + data.id.slice(2);
   </CardHeader>
   <CardContent>
     <div
-      class="relative w-full overflow-hidden rounded-lg"
-      style={{ paddingTop: "56.25%" }}
+      class="relative w-full overflow-hidden rounded-lg cursor-pointer"
+      style="padding-top:56.25%"
+      id="video-container"
+      data-playlist-id={uploadsPlaylistId}
+      data-title={data.title}
     >
-      <iframe
-        src={`https://www.youtube.com/embed/videoseries?list=${uploadsPlaylistId}`}
-        title={`Latest videos playlist of ${data.title}`}
-        class="absolute top-0 left-0 h-full w-full border-0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+      <div
+        class="absolute top-0 left-0 h-full w-full bg-slate-900 flex items-center justify-center"
+      >
+        <Play
+          className="h-16 w-16 text-white bg-red-600 rounded-full p-4 shadow-lg"
+        />
+      </div>
     </div>
   </CardContent>
 </Card>
+
+<script>
+  const container = document.getElementById("video-container");
+  const playlistId = container.dataset.playlistId;
+  const channelTitle = container.dataset.title;
+
+  container.addEventListener("click", () => {
+    container.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1"
+        title="Latest videos playlist of ${channelTitle}"
+        class="absolute top-0 left-0 h-full w-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    `;
+  });
+</script>
