@@ -13,10 +13,10 @@ import {
   BarChart3,
 } from "lucide-react";
 import BaseLayout from "../../../layout/BaseLayout.astro";
-import HeaderReact from "../../../components/Header.jsx";
-import FooterReact from "../../../components/FooterReact.jsx";
-import TopChannelsHeader from "../../../components/top-channel/TopChannelsHeader.jsx";
-import CountryNavigation from "../../../components/top-channel/Country-Navigation.jsx";
+import Header from "../../../components/Header.jsx";
+import Footer from "@/components/Footer.astro";
+import TopChannelHeader from "@/components/top-channel/TopChannelHeader.astro";
+import CountryNav from "@/components/top-channel/CountryNav.astro";
 
 function formatNumber(n) {
   return new Intl.NumberFormat("en", {
@@ -58,11 +58,11 @@ const channels = results;
   pageDescription="See the top 10 YouTube channels ranked by estimated monthly income, views, and subscribers. Updated for 2025 — check who’s making the most money!"
   pageUrl="https://youtubersincome.com/top-youtube-channels/canada"
 >
-  <HeaderReact client:only="react" />
+  <Header client:load />
 
   <div class="bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100">
-    <TopChannelsHeader />
-    <CountryNavigation />
+    <TopChannelHeader />
+    <CountryNav />
     <main class="container max-w-7xl mx-auto px-4 py-6 md:py-12">
       <div class="space-y-6 md:space-y-8">
         <div class="space-y-4 md:space-y-6">
@@ -252,5 +252,5 @@ const channels = results;
       merchandise, and other monetization methods.
     </p>
   </section>
-  <FooterReact />
+  <Footer />
 </BaseLayout>

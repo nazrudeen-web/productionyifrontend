@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import HeaderReact from "../components/Header.jsx";
-import FooterReact from "../components/FooterReact.jsx";
+import Header from "../components/Header.jsx";
+import Footer from "@/components/Footer.astro";
 import BlogPostLayout from "../components/blog/BlogPostLayout.jsx";
 
 const { frontmatter } = Astro.props;
@@ -24,7 +24,7 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleString("en-US", {
 ---
 
 <BaseLayout {pageTitle} {pageDescription} {pageUrl} {pageImage} {isBlog}>
-  <HeaderReact />
+  <Header client:load />
   <div
     class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
   >
@@ -39,5 +39,5 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleString("en-US", {
     </main>
   </div>
 
-  <FooterReact />
+  <Footer />
 </BaseLayout>
