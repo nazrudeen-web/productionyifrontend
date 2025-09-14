@@ -1,6 +1,6 @@
 ---
 import { Button } from "@/components/ui/button";
-import { Youtube, Twitter, Mail, Play, ArrowRight } from "lucide-react";
+import { Youtube, Twitter, Facebook, Play, ArrowRight } from "lucide-react";
 ---
 
 <footer
@@ -46,32 +46,43 @@ import { Youtube, Twitter, Mail, Play, ArrowRight } from "lucide-react";
           channel makes with our advanced analytics platform.
         </p>
         <div class="flex space-x-3">
-          <Button
+          <!-- <Button
             variant="ghost"
             size="icon"
             aria-label="Visit our YouTube channel"
             className="hover:bg-white/10 text-slate-300 hover:text-white transition-colors duration-200"
           >
             <Youtube className="h-5 w-5" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Follow us on Twitter"
-            className="hover:bg-white/10 text-slate-300 hover:text-white transition-colors duration-200"
+          </Button> -->
+          {/* X (Twitter) */}
+          <a
+            href="https://x.com/YoutubersIncome"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Twitter className="h-5 w-5" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Send us an email"
-            className="hover:bg-white/10 text-slate-300 hover:text-white transition-colors duration-200"
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Follow us on Twitter"
+              className="hover:bg-white/10 text-slate-300 hover:text-white transition-colors duration-200"
+            >
+              <Twitter className="h-5 w-5" />
+            </Button>
+          </a>
+          {/* Facebook */}
+          <a
+            href="https://www.facebook.com/profile.php?id=61580633875930"
+            target="_blank"
           >
-            <Mail className="h-5 w-5" />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Send us an email"
+              className="hover:bg-white/10 text-slate-300 hover:text-white transition-colors duration-200"
+            >
+              <Facebook className="h-5 w-5" />
+            </Button>
+          </a>
         </div>
       </div>
 
